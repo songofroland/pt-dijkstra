@@ -1,9 +1,14 @@
+:root {
+  --background-color: #282c34;
+  --element-background: #2d323b;
+}
+
 .App {
   text-align: center;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--background-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,4 +16,22 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Canvas {
+  background-color: var(--element-background);
+  position: relative;
+  height: 50vh;
+  width: 50vh;
+}
+
+.Node {
+  height: 2vh;
+  width: 2vh;
+  border-radius: 50%;
+  font-size: 2vh;
+  text-align: center;
+  vertical-align: middle;
+  background-color: white;
+  color: black;
 }
