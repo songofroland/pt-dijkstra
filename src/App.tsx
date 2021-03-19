@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         Dijkstra is cool guy!
-        <Canvas/>
+        <Canvas nodes={['A', 'B']} edges={[{from: 0, to: 1}]}/>
       </header>
     </div>
   );
