@@ -13,6 +13,7 @@ function Edge({position: {x, y, len, rot}, label}
     backgroundColor: 'white',
     height: '1px',
     width: `${len}%`,
+    transformOrigin: 'top left',
     transform: `rotate(${rot}deg)`,
   };
   return <div style={style}>{label}</div>;
