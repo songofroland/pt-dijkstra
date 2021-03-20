@@ -40,12 +40,13 @@ function calculateEdgePosition(e: {
   // a ^ 2 + b ^ 2 = c ^ 2
   const getC = (a: number, b: number) => Math.sqrt((a * a) + (b * b));
   const getBeta = (a: number, b: number, c: number) =>
-    Math.acos((a * a + c * c - b * b) / (2 * a * c));
-
+    Math.acos((b * b + c * c - a * a) / (2 * b * c));
+  const toDegrees = (rad: number) => rad * (180/Math.PI);
   const a = y2 - y1;
   const b = x2 - x1;
   const c = getC(a, b);
-  const angle = getBeta(a, b, c);
+  const beta = toDegrees(getBeta(a, b, c));
+  const angle = y2 > y1 ? beta : -beta;
   return {
     x: x1,
     y: y1,
