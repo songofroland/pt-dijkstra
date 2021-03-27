@@ -33,6 +33,16 @@
         "indent": [
             "error",
             2
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 99
+            }
         ]
     }
 }
