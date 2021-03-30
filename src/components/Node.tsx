@@ -9,7 +9,7 @@ function Node({x, y, label}:{x: number, y: number, label?: string}) {
     overflow: 'visible',
     transform: 'translate(-50%, -50%)',
   };
-  return <div style={style}><div className="Node">{label}</div></div>;
+  return <div style={style}><div className="node">{label}</div></div>;
 }
 
 export default Node;

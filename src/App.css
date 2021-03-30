@@ -3,11 +3,11 @@
   --element-background: #2d323b;
 }
 
-.App {
+.app {
   text-align: center;
 }
 
-.App-header {
+.app-header {
   background-color: var(--background-color);
   min-height: 100vh;
   display: flex;
@@ -18,14 +18,14 @@
   color: white;
 }
 
-.Canvas {
+.canvas {
   background-color: var(--element-background);
   position: relative;
   height: 50vh;
   width: 50vh;
 }
 
-.Node {
+.node {
   height: 2vh;
   width: 2vh;
   border-radius: 50%;
