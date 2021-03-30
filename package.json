@@ -61,7 +61,7 @@
       ],
       "comma-dangle": [
         "warn",
-        "never"
+        "always-multiline"
       ],
       "quotes": [
         "warn",

@@ -7,14 +7,14 @@ interface IEdge {
   to: number;
 };
 
-interface ImappedNode {
+interface MappedNode {
   label?: string;
   id: number;
   x: number;
   y: number;
 }
 
-interface ImappedEdge {
+interface MappedEdge {
   id: number;
   from: {
     x: number,
@@ -26,9 +26,9 @@ interface ImappedEdge {
   };
 }
 
-function calulateNodes(
-  nodes: Array<string>,
-  edges: Array<IEdge>) : [Array<ImappedNode>, Array<ImappedEdge>] {
+function calulateNodes(nodes: Array<string>, edges: Array<IEdge>):
+  [Array<MappedNode>, Array<MappedEdge>]
+{
   // TODO better node placing
   const mappedNodes = nodes.map((l, i) => ({
     label: l,
@@ -53,15 +53,15 @@ function calulateNodes(
 function Canvas({nodes, edges}
   : {
     nodes: Array<string>,
-    edges: Array<IEdge>
+    edges: Array<IEdge>,
   }) {
   const [nodesToRender, edgesToRender] = calulateNodes(nodes, edges);
-  const nodeComponents = nodesToRender.map((node: ImappedNode) => {
-    return <Node x={node.x} y={node.y} label={node.label} key={node.id} />;
-  });
-  const edgeComponents = edgesToRender.map((edge: ImappedEdge) => {
-    return <Edge from={edge.from} to={edge.to} key={edge.id} />;
-  });
+  const nodeComponents = nodesToRender.map((node: MappedNode) =>
+    <Node x={node.x} y={node.y} label={node.label} key={node.id} />
+  );
+  const edgeComponents = edgesToRender.map((edge: MappedEdge) =>
+    <Edge from={edge.from} to={edge.to} key={edge.id} />
+  );
   return <div className="canvas">
     {edgeComponents}
     {nodeComponents}
@@ -69,4 +69,3 @@ function Canvas({nodes, edges}
 }
 
 export default Canvas;
-
