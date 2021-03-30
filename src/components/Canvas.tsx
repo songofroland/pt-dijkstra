@@ -36,19 +36,14 @@ function calulateNodes(
     x: Math.random() * 100,
     y: Math.random() * 100,
   }));
-  const mappedEdges = edges.map((obj, i) => {
-    const node1 = mappedNodes.find((e) => e.id === obj?.from);
-    const node2 = mappedNodes.find((e) => e.id === obj?.to);
+  const mappedEdges = edges.map((obj: IEdge, i) => {
+    const defaultNode = { x: 0, y: 0 };
+    const node1 = mappedNodes.find((e) => e.id === obj.from) ?? defaultNode;
+    const node2 = mappedNodes.find((e) => e.id === obj.to) ?? defaultNode;
     return {
       id: i,
-      from: {
-        x: node1?.x ?? 0,
-        y: node1?.y ?? 0,
-      },
-      to: {
-        x: node2?.x ?? 0,
-        y: node2?.y ?? 0,
-      },
+      from: { x: node1.x, y: node1.y },
+      to: { x: node2.x, y: node2.y },
     };
   });
   return [mappedNodes, mappedEdges];
