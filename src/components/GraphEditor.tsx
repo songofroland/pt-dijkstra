@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
-import { precheck, parse } from '../graphs/parsing';
-import samples from '../graphs/samples';
+import {useState} from 'react';
+import {isValid, parse} from '../logic/graphParsing';
+import samples from '../logic/graphSamples';
 
 function GraphEditor() {
   const [userInput, setUserInput] = useState({
@@ -11,7 +11,7 @@ function GraphEditor() {
 
   const textareaCallback = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const userText = e.target.value;
-    setUserInput({ isCorrect: precheck(userText), text: userText });
+    setUserInput({isCorrect: isValid(userText), text: userText});
   };
 
   const renderCallback = (e: React.MouseEvent<HTMLInputElement>) => {
