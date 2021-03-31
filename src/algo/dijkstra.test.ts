@@ -2,7 +2,7 @@ import calculatePaths from './dijkstra';
 import {Result} from './dijkstra';
 
 // TODO: Move to "tests/" directory, test more graphs
-const myGraph: Array<Array<number>> = [
+const myGraph = [
   [0, 2, 6, 0, 0, 0, 0],
   [2, 0, 0, 5, 0, 0, 0],
   [6, 0, 0, 8, 0, 0, 0],
