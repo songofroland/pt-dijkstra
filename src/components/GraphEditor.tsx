@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { isValid, parse } from '../logic/graphParsing';
 import samples from '../logic/graphSamples';
 
-function GraphEditor() {
+function GraphEditor({ onFinish }: { onFinish: Function }) {
   const [userInput, setUserInput] = useState({
     isCorrect: true,
     text: samples.simple,
@@ -15,8 +15,7 @@ function GraphEditor() {
   };
 
   const renderCallback = (e: React.MouseEvent<HTMLInputElement>) => {
-    parse(userInput.text);
-    console.log(e);
+    if (userInput.isCorrect) onFinish(parse(userInput.text));
   };
 
   return <div className='graphEditor'>

@@ -37,6 +37,6 @@ export function isValid(text: string) : boolean {
 }
 
 export function parse(text: string) {
-  // TODO
+  // TODO make triangle square
   return split(text);
 }
