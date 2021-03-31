@@ -6,7 +6,7 @@ function split(text: string): Graph {
     .map((row: string) =>
       row.split(' ')
         .map((element: string) => parseInt(element))
-        .filter((element: number) => !Number.isNaN(element))
+        .filter((element: number) => !Number.isNaN(element)),
     )
     .filter((row: GraphRow) => row.length !== 0);
 }

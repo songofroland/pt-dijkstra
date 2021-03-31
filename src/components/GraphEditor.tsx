@@ -6,7 +6,7 @@ import samples from '../logic/graphSamples';
 function GraphEditor() {
   const [userInput, setUserInput] = useState({
     isCorrect: true,
-    text: samples.simple
+    text: samples.simple,
   });
 
   const textareaCallback = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
