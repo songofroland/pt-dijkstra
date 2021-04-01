@@ -1,3 +1,5 @@
+import { Graph } from './commonInterfaces';
+
 interface Nodes {
     [key: string]: number
 }
@@ -17,14 +19,15 @@ export class Result {
     }
 }
 
-export default function calculatePaths(graph: Array<Array<number>>, startNode: number = 0) {
+export default function calculatePaths(graph: Graph, startNode: number = 0) {
   // TODO: doccomment
   const nodes = Array.from(Array(graph.length).keys());
   const pathsMap: PathsMap = nodes.reduce(
     (acc: PathsMap, curr: number) => (acc[curr] = [], acc), {}
   );
   const unvisitedNodes: Set<number> = new Set(nodes);
-  const costs: Nodes = nodes.reduce((acc: Nodes, curr: number) => (acc[curr] = Infinity, acc), {});
+  const costs: Nodes = nodes.reduce((acc: Nodes, curr: number) =>
+    (acc[curr] = Infinity, acc), {});
 
   costs[startNode] = 0;
   let currentNode = startNode;

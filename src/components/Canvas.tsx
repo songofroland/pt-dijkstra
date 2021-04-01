@@ -57,10 +57,10 @@ function Canvas({nodes, edges}
   }) {
   const [nodesToRender, edgesToRender] = calulateNodes(nodes, edges);
   const nodeComponents = nodesToRender.map((node: MappedNode) =>
-    <Node x={node.x} y={node.y} label={node.label} key={node.id} />
+    <Node x={node.x} y={node.y} label={node.label} key={node.id} />,
   );
   const edgeComponents = edgesToRender.map((edge: MappedEdge) =>
-    <Edge from={edge.from} to={edge.to} key={edge.id} />
+    <Edge from={edge.from} to={edge.to} key={edge.id} />,
   );
   return <div className="canvas">
     {edgeComponents}

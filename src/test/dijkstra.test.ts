@@ -1,8 +1,8 @@
-import calculatePaths from './dijkstra';
-import {Result} from './dijkstra';
+import calculatePaths from '../logic/dijkstra';
+import {Result} from '../logic/dijkstra';
 
-// TODO: Move to "tests/" directory, test more graphs
-const myGraph: Array<Array<number>> = [
+// TODO: test more graphs
+const myGraph = [
   [0, 2, 6, 0, 0, 0, 0],
   [2, 0, 0, 5, 0, 0, 0],
   [6, 0, 0, 8, 0, 0, 0],

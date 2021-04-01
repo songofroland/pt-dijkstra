@@ -70,7 +70,7 @@
       "max-len": [
         "error",
         {
-          "code": 85
+          "code": 90
         }
       ]
     }
