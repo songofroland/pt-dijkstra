@@ -1,6 +1,6 @@
 import {Graph, GraphRow} from './commonInterfaces';
 
-function split(text: string): Graph {
+function toMatrix(text: string): Graph {
   const rows = text.split('\n');
   return rows
     .map((row: string) =>
@@ -13,10 +13,7 @@ function split(text: string): Graph {
 
 export function isSquare(graph: Graph) : boolean {
   const squareSideLength = graph.length;
-  for (const graphRow of graph) {
-    if (graphRow.length !== squareSideLength) return false;
-  }
-  return true;
+  return graph.every(row => row.length === squareSideLength);
 }
 
 export function isTriangle(graph: Graph): boolean {
@@ -30,10 +27,9 @@ export function isTriangle(graph: Graph): boolean {
 }
 
 export function isValid(text: string): boolean {
-  const graph = split(text);
-  if (graph.length === 0) return false;
-  if (!isSquare(graph) && !isTriangle(graph)) return false;
-  return true;
+  const graph = toMatrix(text);
+  if (!graph.length) return false;
+  return isSquare(graph) || isTriangle(graph);
 }
 
 function mirrorDiagonally(x: number, y: number, squareSide: number):
@@ -61,8 +57,8 @@ function squareGraph(graph: Graph): Graph {
  * Parses text into graph
  * @param text Should be checked with 'isValid(text)' before.
  */
-export function parse(text: string): Graph {
-  const graph = split(text);
+export function parseValidGraph(text: string): Graph {
+  const graph = toMatrix(text);
   if (isTriangle(graph)) return squareGraph(graph)
   return graph;
 }

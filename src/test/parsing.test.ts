@@ -1,4 +1,4 @@
-import { isSquare, isTriangle, isValid, parse } from '../logic/graphParsing';
+import { isSquare, isTriangle, isValid, parseValidGraph } from '../logic/graphParsing';
 import { Graph } from '../logic/commonInterfaces';
 
 const squareGraph = [
@@ -36,12 +36,12 @@ test('isTriangle', () => {
     expect(isTriangle(empty)).toBeTruthy();
 })
 
-test('isVaid', () => {
+test('isValid', () => {
     expect(isValid(squareGraphString)).toBeTruthy();
     expect(isValid(invalidGraphString)).toBeFalsy();
 })
 
-test('parse', () => {
-    expect(parse(squareGraphString)).toStrictEqual(squareGraph);
-    expect(parse(traingleGraphString)).toStrictEqual(squareGraph);
+test('parseValidGraph', () => {
+    expect(parseValidGraph(squareGraphString)).toStrictEqual(squareGraph);
+    expect(parseValidGraph(traingleGraphString)).toStrictEqual(squareGraph);
 })

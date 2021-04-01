@@ -9,7 +9,7 @@ function App() {
     <div className="app">
       Dijkstra is cool guy!
       <Canvas nodes={['A', 'B']} edges={[{from: 0, to: 1}]}/>
-      <GraphEditor onFinish={editorCallback}/>
+      <GraphEditor onRender={editorCallback}/>
     </div>
   );
 }

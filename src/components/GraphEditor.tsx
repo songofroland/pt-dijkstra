@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { isValid, parse } from '../logic/graphParsing';
+import { isValid, parseValidGraph } from '../logic/graphParsing';
 import samples from '../logic/graphSamples';
 
-function GraphEditor({ onFinish }: { onFinish: Function }) {
+function GraphEditor({ onRender }: { onRender: Function }) {
   const [userInput, setUserInput] = useState({
     isCorrect: true,
     text: samples.simple,
@@ -15,14 +15,13 @@ function GraphEditor({ onFinish }: { onFinish: Function }) {
   };
 
   const renderCallback = (e: React.MouseEvent<HTMLInputElement>) => {
-    if (userInput.isCorrect) onFinish(parse(userInput.text));
+    if (userInput.isCorrect) onRender(parseValidGraph(userInput.text));
   };
 
-  return <div className='graphEditor'>
+  return <div className='graph_editor'>
     <textarea onChange={textareaCallback} value={userInput.text} />
-    <div className='editorBar'>
-      <div className=
-        {userInput.isCorrect ? 'graphValid' : ''}>
+    <div className='editor_bar'>
+      <div className={userInput.isCorrect ? 'graph_valid' : ''}>
         <span>This cannot be converted to graph</span>
       </div>
       <input type='button' value='Render' onClick={renderCallback} />
