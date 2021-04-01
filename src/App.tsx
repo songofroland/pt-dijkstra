@@ -2,13 +2,28 @@ import './App.css';
 import React from 'react';
 import GraphEditor from './components/GraphEditor';
 import Canvas from './components/Canvas';
+import mapGraph from './logic/graphMapping';
+import { Graph } from './logic/commonInterfaces';
+import { useState } from 'react';
+import samples from './logic/graphSamples';
 
 function App() {
-  const editorCallback = (graph: any) => console.log(graph)
+  const [mappedGraph, setMappedGraph] = useState({
+    graph: mapGraph(samples.simple.graph), //TODO handle initial state better
+    path: [], //some kind of dijkstra result here
+  });
+  const editorCallback = (graph: Graph) => {
+    setMappedGraph({
+      graph: mapGraph(graph),
+      path: [],
+    });
+  };
   return (
     <div className="app">
-      Dijkstra is cool guy!
-      <Canvas nodes={['A', 'B']} edges={[{from: 0, to: 1}]}/>
+      <h1>Dijkstra is cool guy!</h1>
+      <Canvas
+        mappedNodes={mappedGraph.graph[0]}
+        mappedEdges={mappedGraph.graph[1]} />
       <GraphEditor onRender={editorCallback}/>
     </div>
   );

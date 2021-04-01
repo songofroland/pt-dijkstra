@@ -1,19 +1,9 @@
 /* eslint-disable */
 const samples = {
-simple:
-`123
-123
-123`,
-
-complex:
-`123
-123
-123`,
-
-medium:
-`123
-123
-123`
+  simple: {
+    graph: [[1, 2, 3], [1, 2, 3], [1, 2, 3]],
+    string: '1 2 3\n1 2 3\n1 2 3',
+  },
 };
 
 export default samples;
