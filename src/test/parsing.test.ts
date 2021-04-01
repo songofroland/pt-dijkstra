@@ -1,4 +1,4 @@
-import { isSquare, isTriangle, isValid } from '../logic/graphParsing';
+import { isSquare, isTriangle, isValid, parse } from '../logic/graphParsing';
 import { Graph } from '../logic/commonInterfaces';
 
 const squareGraph = [
@@ -13,10 +13,14 @@ const invalidGraph = [
 ];
 const traingleGraph = [
     [1, 1, 1],
-    [2, 2,],
-    [3]
+    [1, 1],
+    [1]
 ];
 const empty: Graph = [];
+
+const squareGraphString = '\n   1  1 1\n\n    1 1 1\n1 1 1\n\n\n\n';
+const traingleGraphString = ' 1  1  1\n \n 1 1 \n  1 '
+const invalidGraphString = '11 1\n1 1 1\n1 1 1';
 
 test('isSquare', () => {
     expect(isSquare(squareGraph)).toBeTruthy();
@@ -32,9 +36,12 @@ test('isTriangle', () => {
     expect(isTriangle(empty)).toBeTruthy();
 })
 
-test('precheck', () => {
-    const validGraph = '\n   1  1 1\n\n    1 1 1\n1 1 1\n\n\n\n';
-    const invalidGraph = '11 1\n1 1 1\n1 1 1';
-    expect(isValid(validGraph)).toBeTruthy();
-    expect(isValid(invalidGraph)).toBeFalsy();
+test('isVaid', () => {
+    expect(isValid(squareGraphString)).toBeTruthy();
+    expect(isValid(invalidGraphString)).toBeFalsy();
+})
+
+test('parse', () => {
+    expect(parse(squareGraphString)).toStrictEqual(squareGraph);
+    expect(parse(traingleGraphString)).toStrictEqual(squareGraph);
 })
