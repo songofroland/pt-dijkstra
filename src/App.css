@@ -30,7 +30,7 @@
   color: black;
 }
 
-.graph_editor {
+.graph-editor {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -38,14 +38,14 @@
   width: 70vw;
 }
 
-.editor_bar {
+.editor-bar {
   display: grid;
   grid-template-columns: 50% 50%;
   min-height: em;
   margin: 10px;
 }
 
-.graph_valid > * {
+.graphvalid > * {
   display: none;
 }
 
