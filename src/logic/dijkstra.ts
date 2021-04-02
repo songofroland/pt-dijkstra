@@ -1,22 +1,22 @@
 import { Graph } from './commonInterfaces';
 
 interface Nodes {
-    [key: string]: number
+  [key: string]: number
 }
 
 interface PathsMap {
-    [key: string]: number[]
+  [key: string]: number[]
 }
 
 
 export class Result {
-    nodes: Nodes;
-    pathMap: PathsMap;
+  nodes: Nodes;
+  pathMap: PathsMap;
 
-    constructor(distances: Nodes, pathMap: PathsMap) {
-      this.nodes = distances;
-      this.pathMap = pathMap;
-    }
+  constructor(distances: Nodes, pathMap: PathsMap) {
+    this.nodes = distances;
+    this.pathMap = pathMap;
+  }
 }
 
 export default function calculatePaths(graph: Graph, startNode: number = 0) {
