@@ -17,6 +17,7 @@ class Edge {
     this.from = from;
     this.to = to;
     this.label = label;
+    console.log(this);
   }
 };
 
@@ -37,7 +38,7 @@ function getEdgesArray(graph: Graph): Array<Edge> {
   }
   for (let from = 0; from < graph.length; from++) {
     for (let to = 0; to < graph[from].length; to++) {
-      const edge = new Edge(from, to, graph[from][to])
+      const edge = new Edge(from, to, graph[from][to]);
       if (edge.label !== 0 && edge.from !== edge.to && !isAccounted(edge)) {
         edges.add(edge);
       }
@@ -73,7 +74,7 @@ function* labelGen(): Generator<string> {
     }
     return nonDecimal
   }
-  let current = 'A';
+  let current = alphabet[0];
   while (true) {
     yield current;
     current = increment(current.split('')).join('');
@@ -90,7 +91,6 @@ export default function mapGraph(graph: Graph):
 {
   const nodes = getNodesArray(graph);
   const edges = getEdgesArray(graph);
-  console.log('Final edge array', edges, 'for graph', graph);
   return calulateNodes(nodes, edges);
 }
 
