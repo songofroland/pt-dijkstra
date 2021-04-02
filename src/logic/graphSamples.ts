@@ -1,8 +1,8 @@
 /* eslint-disable */
 const samples = {
   simple: {
-    graph: [[1, 2, 3], [1, 2, 3], [1, 2, 3]],
-    string: '1 2 3\n1 2 3\n1 2 3',
+    graph: [[1, 1, 1], [1, 1, 1], [1, 1, 1]],
+    string: '1 1 1\n1 1 1\n1 1 1',
   },
 };
 

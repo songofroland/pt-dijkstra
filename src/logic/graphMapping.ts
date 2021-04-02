@@ -1,16 +1,51 @@
 
 import { Graph, MappedEdge, MappedNode } from './commonInterfaces';
 
+const LABEL_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
 interface IEdge {
+  label?: string;
   from: number;
   to: number;
 };
 
+function getEdgesArray(graph: Graph): Array<IEdge> { //BUG HERE
+  const edges: Set<IEdge> = new Set();
+  for (let from = 0; from < graph.length; from++) {
+    for (let to = 0; to < graph[from].length; to++) {
+      const edge = graph[from][to];
+      if (edge !== 0 && from < to) {
+        edges.add({
+          label: edge.toString(),
+          from: from,
+          to: to,
+        });
+      }
+    }
+  }
+  return Array.from(edges);
+}
+
+function* labelGen(): Generator<string> {
+  const alphabet = LABEL_ALPHABET.split('');
+  while (true) {
+    for (const letter of alphabet) {
+      yield letter;
+    }
+  }
+  //TODO yield AA .. ZZ and AAA ... ZZZ if needed
+}
+
+function getNodesArray(graph: Graph): Array<string> {
+  const labels = labelGen();
+  return Array.from({ length: graph.length }, () => labels.next().value);
+}
+
 export default function mapGraph(graph: Graph):
   [Array<MappedNode>, Array<MappedEdge>]
 {
-  const nodes = ['A', 'B'];
-  const edges = [{ from: 0, to: 1 }];
+  const nodes = getNodesArray(graph);
+  const edges = getEdgesArray(graph);
   return calulateNodes(nodes, edges);
 }
 
