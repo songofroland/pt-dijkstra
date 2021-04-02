@@ -11,18 +11,20 @@ interface Paths {
 export class dijkstraTracer{
     costs: Nodes;
     paths: Paths;
+    traversalHistory: Array<{node: number, lookups: Array<number>}>;
     #graph: Graph;
     #startNode: number;
     
     constructor(graph: Graph, startNode: number = 0) {
       this.#graph = graph;
       this.#startNode = startNode;
+      this.traversalHistory = [];
       this.costs = {};
       this.paths = {};
-      this.setCostsAndPaths();
+      this.setCostsPathsAndTraversalOrder();
     }
 
-    setCostsAndPaths() {
+    setCostsPathsAndTraversalOrder() {
       const nodes = Array.from(Array(this.#graph.length).keys());
       const unvisitedNodes: Set<number> = new Set(nodes);
       const paths: Paths = arrayToObject(nodes, []);
@@ -30,7 +32,7 @@ export class dijkstraTracer{
       costs[this.#startNode] = 0;
 
       let currentNode = this.#startNode;
-    
+      
       while (unvisitedNodes.size) {
         for (const [neighbourNode, neighbourCost] of this.#graph[currentNode].entries()) {
           if (neighbourCost !== 0) {
@@ -43,32 +45,40 @@ export class dijkstraTracer{
             }
           }
         }
-    
+        
+        this.traversalHistory.push(this._getTraversalFor(currentNode));
         unvisitedNodes.delete(currentNode);
-        currentNode = this.getCheapestNode(this.getUnvisitedNodes(costs, unvisitedNodes));
+        currentNode = getKeyOfMinValue(filterObject(costs, unvisitedNodes));
       }
     
       this.costs = costs;
       this.paths = paths;
     }
   
-    getUnvisitedNodes(nodes: Nodes, unvisited: Set<number>) {
-      const unvisitedNodes: Nodes = {};
-      for (const [key, value] of Object.entries(nodes)) {
-        if (unvisited.has(parseInt(key))) {
-          unvisitedNodes[key] = value;
-        }
+    _getTraversalFor(node: number){
+      return {
+        node: node,
+        lookups: this.#graph[node].flatMap((cost, node) => cost === 0 ? []: node),
       }
-      return unvisitedNodes;
-    }
-    
-    getCheapestNode(nodes: Nodes) {
-      const minDistance = Math.min(...Object.values(nodes));
-      return parseInt(Object.keys(nodes).find((key) => nodes[key] === minDistance)!);
     }
     
 }
 
-function arrayToObject(obj: Array<any>, value: any){
-  return obj.reduce((acc, curr) => (acc[curr] = value, acc), {});
+function filterObject(nodes: Nodes, allowedKeys: Set<number>): Nodes {
+  const result: Nodes = {};
+  for (const [key, value] of Object.entries(nodes)) {
+    if (allowedKeys.has(parseInt(key))) {
+      result[key] = value;
+    }
+  }
+  return result;
+}
+
+function getKeyOfMinValue(obj: Nodes): number {
+  const minValue = Math.min(...Object.values(obj));
+  return parseInt(Object.keys(obj).find((key) => obj[key] === minValue)!);
+}
+
+function arrayToObject(obj: Array<any>, defaultValue: any){
+  return obj.reduce((acc, curr) => (acc[curr] = defaultValue, acc), {});
 }
