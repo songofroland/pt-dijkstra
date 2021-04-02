@@ -1,17 +1,22 @@
 import { Graph } from './commonInterfaces';
 
-interface Nodes {
-    [key: string]: number
+interface Costs {
+    [key: number]: number
 }
 
 interface Paths {
-    [key: string]: Array<number>
+    [key: number]: Array<number>
+}
+
+interface TraversalRecord{
+  node: number,
+  lookups: Array<number>
 }
 
 export class dijkstraTracer{
-    costs: Nodes;
+    costs: Costs;
     paths: Paths;
-    traversalHistory: Array<{node: number, lookups: Array<number>}>;
+    traversalHistory: Array<TraversalRecord>;
     #graph: Graph;
     #startNode: number;
     
@@ -21,14 +26,14 @@ export class dijkstraTracer{
       this.traversalHistory = [];
       this.costs = {};
       this.paths = {};
-      this.setCostsPathsAndTraversalOrder();
+      this.setCostsPathsAndTraversalHistory();
     }
 
-    setCostsPathsAndTraversalOrder() {
+    setCostsPathsAndTraversalHistory() {
       const nodes = Array.from(Array(this.#graph.length).keys());
-      const unvisitedNodes: Set<number> = new Set(nodes);
+      const unvisitedNodes = new Set(nodes);
       const paths: Paths = arrayToObject(nodes, []);
-      const costs: Nodes = arrayToObject(nodes, Infinity);
+      const costs: Costs = arrayToObject(nodes, Infinity);
       costs[this.#startNode] = 0;
 
       let currentNode = this.#startNode;
@@ -64,21 +69,21 @@ export class dijkstraTracer{
     
 }
 
-function filterObject(nodes: Nodes, allowedKeys: Set<number>): Nodes {
-  const result: Nodes = {};
+function filterObject(nodes: Costs, allowedKeys: Set<number>): Costs {
+  const result: Costs = {};
   for (const [key, value] of Object.entries(nodes)) {
     if (allowedKeys.has(parseInt(key))) {
-      result[key] = value;
+      result[parseInt(key)] = value;
     }
   }
   return result;
 }
 
-function getKeyOfMinValue(obj: Nodes): number {
+function getKeyOfMinValue(obj: Costs): number {
   const minValue = Math.min(...Object.values(obj));
-  return parseInt(Object.keys(obj).find((key) => obj[key] === minValue)!);
+  return parseInt(Object.keys(obj).find((key) => obj[parseInt(key)] === minValue)!);
 }
 
-function arrayToObject(obj: Array<any>, defaultValue: any){
-  return obj.reduce((acc, curr) => (acc[curr] = defaultValue, acc), {});
+function arrayToObject(arr: Array<any>, defaultValue: any): any{
+  return arr.reduce((acc, curr) => (acc[curr] = defaultValue, acc), {});
 }
