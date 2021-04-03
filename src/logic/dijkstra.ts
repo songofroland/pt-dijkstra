@@ -13,7 +13,7 @@ interface TraversalRecord{
   lookups: Array<number>
 }
 
-export class dijkstraTracer{
+export class DijkstraTracer{
     costs: Costs;
     paths: Paths;
     traversalHistory: Array<TraversalRecord>;
@@ -26,10 +26,10 @@ export class dijkstraTracer{
       this.traversalHistory = [];
       this.costs = {};
       this.paths = {};
-      this.setCostsPathsAndTraversalHistory();
+      this._setCostsPathsAndTraversalHistory();
     }
 
-    setCostsPathsAndTraversalHistory() {
+    _setCostsPathsAndTraversalHistory() {
       const nodes = Array.from(Array(this.#graph.length).keys());
       const unvisitedNodes = new Set(nodes);
       const paths: Paths = arrayToObject(nodes, []);
@@ -51,7 +51,7 @@ export class dijkstraTracer{
           }
         }
         
-        this.traversalHistory.push(this._getTraversalFor(currentNode));
+        this.traversalHistory.push(this.getTraversalFor(currentNode));
         unvisitedNodes.delete(currentNode);
         currentNode = getKeyOfMinValue(filterObject(costs, unvisitedNodes));
       }
@@ -60,7 +60,7 @@ export class dijkstraTracer{
       this.paths = paths;
     }
   
-    _getTraversalFor(node: number){
+    getTraversalFor(node: number): TraversalRecord{
       return {
         node: node,
         lookups: this.#graph[node].flatMap((cost, node) => cost === 0 ? []: node),
