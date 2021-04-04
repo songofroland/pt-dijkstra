@@ -18,10 +18,10 @@ function GraphEditor({ onRender }: { onRender: Function }) {
     if (userInput.isCorrect) onRender(parseValidGraph(userInput.text));
   };
 
-  return <div className='graph_editor'>
+  return <div className='graph-editor'>
     <textarea onChange={textareaCallback} value={userInput.text} />
-    <div className='editor_bar'>
-      <div className={userInput.isCorrect ? 'graph_valid' : ''}>
+    <div className='editor-bar'>
+      <div className={userInput.isCorrect ? 'graph-valid' : ''}>
         <span>This cannot be converted to graph</span>
       </div>
       <input type='button' value='Render' onClick={renderCallback} />
