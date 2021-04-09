@@ -3,7 +3,7 @@ import { Graph, MappedEdge, MappedNode } from './commonInterfaces';
 
 const LABEL_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-class Edge {
+export class Edge {
   label?: number;
   from: number;
   to: number;
@@ -17,22 +17,19 @@ class Edge {
     this.from = from;
     this.to = to;
     this.label = label;
-    console.log(this);
   }
 };
 
 /**
- * Finds all edges in graph matrix. It maybe inefficient (complexity of
+ * Finds all edges in graph matrix. This maybe inefficient (complexity of
  * O(n^3)), but for this purpose it's ok. Tested up to 2016 edges. For
  * that amount takes < 1s. Maybe a bottleneck in the future.
  */
-function getEdgesArray(graph: Graph): Array<Edge> {
+export function getEdgesArray(graph: Graph): Array<Edge> {
   const edges: Set<Edge> = new Set();
   const isAccounted = (edge: Edge) => {
     for (const e of edges) {
-      if (e.equals(edge)) {
-        return true;
-      }
+      if (e.equals(edge)) return true;
     }
     return false;
   }
