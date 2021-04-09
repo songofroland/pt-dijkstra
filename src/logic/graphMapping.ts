@@ -50,7 +50,7 @@ function getEdgesArray(graph: Graph): Array<Edge> {
 /**
  * Generates labels A ... Z then AA ... ZZ then AAA ... ZZZ and so on.
  */
-function* labelGen(): Generator<string> {
+export function* labelGen(): Generator<string> {
   const alphabet = LABEL_ALPHABET.split('');
   const incrementDigit = (digit: string): [string, boolean] => {
     const digitIndex = alphabet.indexOf(digit);

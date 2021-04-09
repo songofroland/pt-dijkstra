@@ -16,10 +16,16 @@ export function isSquare(graph: Graph) : boolean {
   return graph.every(row => row.length === squareSideLength);
 }
 
+function hasZerosOnDiagonal(graph: Graph): boolean {
+  for (let i = 0; i < graph.length; i++) {
+    if (graph[i][i] !== 0) return false
+  }
+  return true;
+}
 
 export function isValid(text: string): boolean {
   const graph = toMatrix(text);
-  return !!graph.length && isSquare(graph);
+  return !!graph.length && isSquare(graph) && hasZerosOnDiagonal(graph);
 }
 
 /**
