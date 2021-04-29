@@ -1,6 +1,6 @@
 import { labelGen, getEdgesArray, Edge } from '../logic/graphMapping';
 
-const EDGE_EXTRACTION_TIMEOUT_MS = 50; // 1/20 of a second
+const EDGE_EXTRACTION_TIMEOUT_MS = 50;
 
 const simpleGraph = [
   [0, 1],
@@ -15,7 +15,7 @@ const normalGraph = [
   [3, 2, 1, 3, 0],
 ];
 
-test('laben generation', () => {
+test('alphabetical edges generatation', () => {
   const generator = labelGen();
   const results = Array.from({ length: 55 }, () => generator.next().value);
   expect(results.slice(0, 3)).toStrictEqual(['A', 'B', 'C']);
@@ -38,9 +38,10 @@ test('edges extraction', () => {
   //TODO check for normal graph
 });
 
-test('edges extraction performance', () => {
+test('edges extraction time', () => {
   const tStart = performance.now();
   getEdgesArray(normalGraph);
   const tFinish = performance.now()
   expect(tFinish - tStart).toBeLessThan(EDGE_EXTRACTION_TIMEOUT_MS);
+  // TODO don't wait for edges to be extracted. Break if time exceeds ^value.
 })

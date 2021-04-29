@@ -1,4 +1,3 @@
-
 import { Graph, MappedEdge, MappedNode } from './commonInterfaces';
 
 const LABEL_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -20,23 +19,33 @@ export class Edge {
   }
 };
 
+export default function mapGraph(graph: Graph):
+  [Array<MappedNode>, Array<MappedEdge>]
+{
+  const nodes = getNodesArray(graph);
+  const edges = getEdgesArray(graph);
+  return calulateNodes(nodes, edges);
+}
+
 /**
- * Finds all edges in graph matrix. This maybe inefficient (complexity of
- * O(n^3)), but for this purpose it's ok. Tested up to 2016 edges. For
- * that amount takes < 1s. Maybe a bottleneck in the future.
+ * Finds all edges in graph matrix. This may be inefficient (complexity
+ * of O(n^3)), but for this purpose it's ok. Tested up to 2016 edges.
+ * For that amount takes < 1s. May be a bottleneck in the future.
  */
 export function getEdgesArray(graph: Graph): Array<Edge> {
   const edges: Set<Edge> = new Set();
-  const isAccounted = (edge: Edge) => {
+
+  const isDuplicate = (edge: Edge) => {
     for (const e of edges) {
       if (e.equals(edge)) return true;
     }
     return false;
-  }
+  };
+
   for (let from = 0; from < graph.length; from++) {
     for (let to = 0; to < graph[from].length; to++) {
       const edge = new Edge(from, to, graph[from][to]);
-      if (edge.label !== 0 && edge.from !== edge.to && !isAccounted(edge)) {
+      if (edge.label !== 0 && edge.from !== edge.to && !isDuplicate(edge)) {
         edges.add(edge);
       }
     }
@@ -49,46 +58,39 @@ export function getEdgesArray(graph: Graph): Array<Edge> {
  */
 export function* labelGen(): Generator<string> {
   const alphabet = LABEL_ALPHABET.split('');
+
   const incrementDigit = (digit: string): [string, boolean] => {
-    const digitIndex = alphabet.indexOf(digit);
-    if (digitIndex === alphabet.length - 1) {
+    let lastDigitInAlphabet = alphabet[alphabet.length - 1];
+    if (digit === lastDigitInAlphabet) {
       return [alphabet[0], true];
     }
-    return [alphabet[digitIndex + 1], false];
-  }
-  const increment = (nonDecimal: Array<string>) => {
-    let workIndex = nonDecimal.length - 1;
+    let nextDigit = alphabet[alphabet.indexOf(digit) + 1];
+    return [nextDigit, false];
+  };
+
+  const increment = (nonDecimalNumber: string) => {
+    let digits = nonDecimalNumber.split('')
     let carry = true;
-    while (carry) {
-      if (workIndex === -1) {
-        nonDecimal = [alphabet[0]].concat(nonDecimal);
-        break;
-      }
-      const [newDigit, newCarry] = incrementDigit(nonDecimal[workIndex]);
-      carry = newCarry;
-      nonDecimal[workIndex] = newDigit;
-      workIndex--;
+    for (let i = digits.length - 1; i >= 0; i--) {
+      if (!carry) break;
+      [digits[i], carry] = incrementDigit(digits[i]);
     }
-    return nonDecimal
-  }
+    if (carry) {
+      digits = [alphabet[0]].concat(digits);
+    }
+    return digits.join('');
+  };
+
   let current = alphabet[0];
   while (true) {
     yield current;
-    current = increment(current.split('')).join('');
+    current = increment(current);
   }
 }
 
 function getNodesArray(graph: Graph): Array<string> {
   const labels = labelGen();
   return Array.from({ length: graph.length }, () => labels.next().value);
-}
-
-export default function mapGraph(graph: Graph):
-  [Array<MappedNode>, Array<MappedEdge>]
-{
-  const nodes = getNodesArray(graph);
-  const edges = getEdgesArray(graph);
-  return calulateNodes(nodes, edges);
 }
 
 function calulateNodes(nodes: Array<string>, edges: Array<Edge>):

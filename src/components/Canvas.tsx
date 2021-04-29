@@ -5,17 +5,17 @@ import { MappedNode, MappedEdge } from '../logic/commonInterfaces';
 
 
 
-function Canvas({mappedNodes, mappedEdges}
+function Canvas({nodes, edges}
   : {
-    mappedNodes: Array<MappedNode>,
-    mappedEdges: Array<MappedEdge>,
+    nodes: Array<MappedNode>,
+    edges: Array<MappedEdge>,
   }) {
   let edgeComponents, nodeComponents;
-  if (mappedNodes.length) {
-    nodeComponents = mappedNodes.map((node: MappedNode) =>
+  if (nodes.length) {
+    nodeComponents = nodes.map((node: MappedNode) =>
       <Node x={node.x} y={node.y} label={node.label} key={node.id} />,
     );
-    edgeComponents = mappedEdges.map((edge: MappedEdge) =>
+    edgeComponents = edges.map((edge: MappedEdge) =>
       <Edge from={edge.from} to={edge.to} key={edge.id} />,
     );
   }
