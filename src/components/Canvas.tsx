@@ -9,7 +9,8 @@ function Canvas({nodes, edges}
   : {
     nodes: Array<MappedNode>,
     edges: Array<MappedEdge>,
-  }) {
+  })
+{
   let edgeComponents, nodeComponents;
   if (nodes.length) {
     nodeComponents = nodes.map((node: MappedNode) =>

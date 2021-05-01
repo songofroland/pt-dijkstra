@@ -4,7 +4,8 @@
 }
 
 .app {
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   background-color: var(--background-color);
   display: flex;
   flex-direction: column;
@@ -17,6 +18,8 @@
   position: relative;
   height: 60vmin;
   width: 60vmin;
+  min-height: 60vmin;
+  min-width: 60vmin;
 }
 
 .node {
@@ -70,6 +73,8 @@ textarea {
   .canvas {
     height: 90vmin;
     width: 90vmin;
+    min-height: 90vmin;
+    min-width: 90vmin;
   }
   .graph-editor {
     width: 90vw;
