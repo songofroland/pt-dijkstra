@@ -1,8 +1,12 @@
 /* eslint-disable */
 const samples = {
   simple: {
-    graph: [[1, 1, 1], [1, 1, 1], [1, 1, 1]],
-    string: '1 1 1\n1 1 1\n1 1 1',
+    graph: [[0, 1, 1], [1, 0, 1], [1, 1, 0]],
+    string: '0 1 1\n1 0 1\n1 1 0',
+  },
+  medium: {
+    graph: [[0, 1, 1], [1, 0, 1], [1, 1, 0]],
+    string: '0 1 1\n1 0 1\n1 1 0',
   },
 };
 
