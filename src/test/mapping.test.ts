@@ -1,4 +1,6 @@
-import { labelGen, getEdgesArray, Edge } from '../logic/graphMapping';
+import { labelGen } from '../logic/graphLabeling'
+import { Edge } from '../logic/commonInterfaces'
+import { getEdgesArray } from '../logic/graphDisassembling';
 
 const EDGE_EXTRACTION_TIMEOUT_MS = 50;
 
