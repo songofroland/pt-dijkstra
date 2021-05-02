@@ -4,7 +4,8 @@
 }
 
 .app {
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   background-color: var(--background-color);
   display: flex;
   flex-direction: column;
@@ -15,8 +16,10 @@
 .canvas {
   background-color: var(--element-background);
   position: relative;
-  height: 50vh;
-  width: 50vh;
+  height: 60vmin;
+  width: 60vmin;
+  min-height: 60vmin;
+  min-width: 60vmin;
 }
 
 .node {
@@ -39,18 +42,44 @@
 }
 
 .editor-bar {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  min-height: em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  min-height: 1em;
   margin: 10px;
 }
 
-.graph-valid > * {
-  display: none;
+.editor-bar > * {
+  margin: 0px 10px;
+  max-width: 100%;
+}
+
+.valid-base {
+  display: flex;
+  justify-content: center;
+  place-items: center;
+}
+.valid > * {
+  opacity: 0;
 }
 
 textarea {
   margin: 10px;
   min-height: 10em;
   resize: none;
+}
+
+@media (max-width: 480px) {
+  .canvas {
+    height: 90vmin;
+    width: 90vmin;
+    min-height: 90vmin;
+    min-width: 90vmin;
+  }
+  .graph-editor {
+    width: 90vw;
+  }
+  .editor-bar {
+    flex-direction: column;
+  }
 }
