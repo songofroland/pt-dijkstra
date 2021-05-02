@@ -1,19 +1,11 @@
-import { Graph } from './commonInterfaces';
+import { Graph, Paths, TraversalRecord, Algorithm } from './commonInterfaces';
 
 interface Costs {
     [key: number]: number
 }
 
-interface Paths {
-    [key: number]: Array<number>
-}
 
-interface TraversalRecord{
-  node: number,
-  lookups: Array<number>
-}
-
-export class DijkstraTracer{
+export class DijkstraTracer implements Algorithm {
     costs: Costs;
     paths: Paths;
     traversalHistory: Array<TraversalRecord>;
@@ -60,7 +52,7 @@ export class DijkstraTracer{
       this.paths = paths;
     }
   
-    getTraversalFor(node: number): TraversalRecord{
+    getTraversalFor(node: number): TraversalRecord {
       return {
         node: node,
         lookups: this.#graph[node].flatMap((cost, node) => cost === 0 ? []: node),

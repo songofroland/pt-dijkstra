@@ -1,4 +1,6 @@
-import { labelGen, getEdgesArray, Edge } from '../logic/graphMapping';
+import { labelGen } from '../logic/graphLabeling'
+import { Edge } from '../logic/commonInterfaces'
+import { getEdgesArray } from '../logic/graphDisassembling';
 
 const EDGE_EXTRACTION_TIMEOUT_MS = 50;
 
@@ -24,15 +26,15 @@ test('alphabetical edges generatation', () => {
 });
 
 test('edges extraction', () => {
-  const simpleGraphExpectedEdge = new Edge(0, 1, 1);
+  const simpleGraphExpectedEdge = new Edge(0, 1);
   const normalGraphExpectedEdges = [
-    new Edge(0, 1, 2),
-    new Edge(0, 2, 6),
-    new Edge(0, 4, 3),
-    new Edge(1, 2, 6),
-    new Edge(1, 4, 2),
-    new Edge(2, 4, 1),
-    new Edge(3, 4, 3),
+    new Edge(0, 1),
+    new Edge(0, 2),
+    new Edge(0, 4),
+    new Edge(1, 2),
+    new Edge(1, 4),
+    new Edge(2, 4),
+    new Edge(3, 4),
   ];
   expect(simpleGraphExpectedEdge.equals(getEdgesArray(simpleGraph)[0]))
   //TODO check for normal graph
