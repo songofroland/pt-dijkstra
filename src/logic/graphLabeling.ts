@@ -6,7 +6,7 @@ import {
   LabeledGraph,
   LabeledEdge,
   LabeledNode,
-} from "./commonInterfaces"
+} from './commonInterfaces'
 
 const LABEL_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -23,7 +23,7 @@ export default function labelGraph(graph: MappedGraph): LabeledGraph {
  * @returns Labeled edges
  */
 function labelEdges(edges: Array<MappedEdge>): Array<LabeledEdge> {
-  return edges.map(edge => { return { ...edge, label: "" } });
+  return edges.map(edge => { return { ...edge, label: '' } });
 }
 
 

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import GraphEditor from './components/GraphEditor';
 import CanvasAnimator from './components/CanvasAnimator';
 
-import { Graph, Frame, MappedGraph, GraphIndex } from './logic/commonInterfaces';
+import { Graph } from './logic/commonInterfaces';
 import samples from './logic/graphSamples';
 import disassembleGraph from './logic/graphDisassembling';
 import createFrames from './logic/graphFrames';
@@ -17,16 +17,18 @@ function App() {
   const processGraph = (graph: Graph) => {
     const disassembledGraph = disassembleGraph(graph);
     const dijkstra = new DijkstraTracer(graph);
-    const frames = createFrames(disassembledGraph, dijkstra.paths, dijkstra.traversalHistory);
+    const frames =
+      createFrames(disassembledGraph, dijkstra.paths, dijkstra.traversalHistory);
     const mappedGraph = mapGraph(disassembledGraph);
     const labeledGraph = labelGraph(mappedGraph);
     return {
       graph: labeledGraph,
-      frames: frames
+      frames: frames,
     }
   };
 
-  const [processedGraph, setProcessedGraph] = useState(processGraph(samples.simple.graph));
+  const [processedGraph, setProcessedGraph] =
+    useState(processGraph(samples.simple.graph));
 
   const editorCallback = (graph: Graph) => {
     setProcessedGraph(processGraph(graph));

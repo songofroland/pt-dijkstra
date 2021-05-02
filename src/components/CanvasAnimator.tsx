@@ -1,3 +1,4 @@
+import React from 'react';
 import { Frame, GraphIndex, LabeledGraph } from '../logic/commonInterfaces';
 import Canvas from './Canvas';
 

@@ -1,4 +1,4 @@
-import { DissasembledGraph, Graph, Edge } from "./commonInterfaces";
+import { DissasembledGraph, Graph, Edge } from './commonInterfaces';
 
 export default function dissasembleGraph(graph: Graph): DissasembledGraph {
   const nodes = getNodesArray(graph);

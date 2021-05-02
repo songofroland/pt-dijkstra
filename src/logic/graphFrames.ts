@@ -16,6 +16,6 @@ export default function createFrames(
     { //frame 2
       inactiveEdges: [dissasembledGraph[1][0]],
       activeEdges: [],
-    }
+    },
   ]
 }

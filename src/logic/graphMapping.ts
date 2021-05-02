@@ -1,4 +1,4 @@
-import { Graph, MappedEdge, MappedNode, Edge, MappedGraph, GraphIndex, DissasembledGraph }
+import { MappedEdge, MappedNode, Edge, MappedGraph, GraphIndex, DissasembledGraph }
   from './commonInterfaces';
 
 
