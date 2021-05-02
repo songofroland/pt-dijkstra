@@ -13,10 +13,10 @@ function Canvas({nodes, edges}
 {
   let edgeComponents, nodeComponents;
   if (nodes.length) {
-    nodeComponents = nodes.map((node: LabeledNode) =>
+    nodeComponents = nodes.map( node =>
       <Node x={node.x} y={node.y} label={node.label} key={node.id} />,
     );
-    edgeComponents = edges.map((edge: LabeledEdge) =>
+    edgeComponents = edges.map( edge =>
       <Edge from={edge.from} to={edge.to} key={edge.id} />,
     );
   }

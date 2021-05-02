@@ -6,7 +6,7 @@ import {
   LabeledGraph,
   LabeledEdge,
   LabeledNode,
-} from './commonInterfaces'
+} from './commonInterfaces';
 
 const LABEL_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -17,15 +17,10 @@ export default function labelGraph(graph: MappedGraph): LabeledGraph {
   ];
 }
 
-/**
- * Turns mapped edges into labeled edges. Each edge has empty label.
- * @param edges Edges to label
- * @returns Labeled edges
- */
 function labelEdges(edges: Array<MappedEdge>): Array<LabeledEdge> {
   return edges.map(edge => { return { ...edge, label: '' } });
+  //TODO place weights as labels
 }
-
 
 function labelNodes(nodes: Array<MappedNode>): Array<LabeledNode> {
   const labels = labelGen();

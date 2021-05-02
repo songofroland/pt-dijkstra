@@ -1,14 +1,12 @@
-import { Paths, TraversalRecord, Frame, DissasembledGraph }
-  from './commonInterfaces';
+import { Frame, DissasembledGraph, Algorithm } from './commonInterfaces';
 
 export default function createFrames(
   dissasembledGraph: DissasembledGraph,
-  nodePaths: Paths,
-  traversalHistory: Array<TraversalRecord>,
+  algorithm: Algorithm,
 ):
   Array<Frame>
 {
-  return [ // Temorary fixed result
+  return [ // Temporary fixed result
     { //frame 1
       inactiveEdges: [],
       activeEdges: [dissasembledGraph[1][0]],

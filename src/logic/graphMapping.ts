@@ -1,12 +1,18 @@
-import { MappedEdge, MappedNode, Edge, MappedGraph, GraphIndex, DissasembledGraph }
-  from './commonInterfaces';
+import {
+  MappedEdge, 
+  MappedNode,
+  Edge,
+  MappedGraph,
+  GraphIndex,
+  DissasembledGraph,
+} from './commonInterfaces';
 
 
 export default function mapGraph(graph: DissasembledGraph): MappedGraph {
-  return calulateNodes(graph[GraphIndex.NODES], graph[GraphIndex.EDGES]);
+  return calcNodes(graph[GraphIndex.NODES], graph[GraphIndex.EDGES]);
 }
 
-function calulateNodes(nodes: Array<number>, edges: Array<Edge>):
+function calcNodes(nodes: Array<number>, edges: Array<Edge>):
   [Array<MappedNode>, Array<MappedEdge>]
 {
   // TODO better node placing

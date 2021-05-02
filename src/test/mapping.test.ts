@@ -26,7 +26,7 @@ test('alphabetical edges generatation', () => {
 });
 
 test('edges extraction', () => {
-  const simpleGraphExpectedEdge = new Edge(0, 1, 1);
+  const simpleGraphExpectedEdge = new Edge(0, 1);
   const normalGraphExpectedEdges = [
     new Edge(0, 1),
     new Edge(0, 2),

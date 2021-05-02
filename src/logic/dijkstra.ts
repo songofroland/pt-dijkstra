@@ -1,11 +1,11 @@
-import { Graph, Paths, TraversalRecord } from './commonInterfaces';
+import { Graph, Paths, TraversalRecord, Algorithm } from './commonInterfaces';
 
 interface Costs {
     [key: number]: number
 }
 
 
-export class DijkstraTracer{
+export class DijkstraTracer implements Algorithm {
     costs: Costs;
     paths: Paths;
     traversalHistory: Array<TraversalRecord>;

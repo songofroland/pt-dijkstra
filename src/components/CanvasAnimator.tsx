@@ -7,10 +7,9 @@ function CanvasAnimator({ graph, frames }
     graph: LabeledGraph,
     frames: Array<Frame>,
   }) {
-  return <Canvas
-    nodes={graph[GraphIndex.NODES]}
-    edges={graph[GraphIndex.EDGES]}
-  />
+  return <>
+    <Canvas nodes={graph[GraphIndex.NODES]} edges={graph[GraphIndex.EDGES]} />
+  </>
 }
 
 export default CanvasAnimator;

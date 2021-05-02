@@ -43,6 +43,11 @@ export interface LabeledEdge extends MappedEdge {
 export type LabeledGraph = [Array<LabeledNode>, Array<LabeledEdge>];
 
 
+export interface Algorithm {
+  traversalHistory: Array<TraversalRecord>,
+  paths: Paths,
+};
+
 export interface Paths {
     [key: number]: Array<number>
 };

@@ -16,9 +16,8 @@ import { DijkstraTracer } from './logic/dijkstra';
 function App() {
   const processGraph = (graph: Graph) => {
     const disassembledGraph = disassembleGraph(graph);
-    const dijkstra = new DijkstraTracer(graph);
     const frames =
-      createFrames(disassembledGraph, dijkstra.paths, dijkstra.traversalHistory);
+      createFrames(disassembledGraph, new DijkstraTracer(graph));
     return {
       graph: labelGraph(mapGraph(disassembledGraph)),
       frames: frames,
