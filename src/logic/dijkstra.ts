@@ -1,17 +1,9 @@
-import { Graph } from './commonInterfaces';
+import { Graph, Paths, TraversalRecord } from './commonInterfaces';
 
 interface Costs {
     [key: number]: number
 }
 
-interface Paths {
-    [key: number]: Array<number>
-}
-
-interface TraversalRecord {
-  node: number,
-  lookups: Array<number>
-}
 
 export class DijkstraTracer{
     costs: Costs;

@@ -1,23 +1,7 @@
-import { Graph, MappedEdge, MappedNode } from './commonInterfaces';
+import { Graph, MappedEdge, MappedNode, Edge } from './commonInterfaces';
 
 const LABEL_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-export class Edge {
-  label?: number;
-  from: number;
-  to: number;
-  equals = (other: Edge) => {
-    return this.label === other.label && (
-      (this.from === other.from && this.to === other.to) ||
-      (this.from === other.to && this.to === other.from)
-    )
-  };
-  constructor(from: number, to: number, label?: number) {
-    this.from = from;
-    this.to = to;
-    this.label = label;
-  }
-};
 
 export default function mapGraph(graph: Graph):
   [Array<MappedNode>, Array<MappedEdge>]
