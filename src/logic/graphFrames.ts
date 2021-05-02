@@ -15,10 +15,10 @@ export function createFrames(
   return [ // Temorary fixed result
     { //frame 1
       inactiveEdges: [],
-      activeEdges: [new Edge(0, 1)],
+      activeEdges: [edges[0]],
     },
     { //frame 2
-      inactiveEdges: [new Edge(0, 1)],
+      inactiveEdges: [edges[0]],
       activeEdges: [],
     }
   ]

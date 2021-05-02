@@ -1,6 +1,11 @@
 export type GraphRow = Array<number>;
 export type Graph = Array<GraphRow>;
 
+export interface Position {
+  x: number;
+  y: number;
+};
+
 export interface MappedNode {
   label?: string;
   id: number;
@@ -11,14 +16,8 @@ export interface MappedNode {
 export interface MappedEdge {
   id: number;
   label?: string;
-  from: {
-    x: number,
-    y: number,
-  };
-  to: {
-    x: number,
-    y: number,
-  };
+  from: Position,
+  to: Position,
 };
 
 export interface Paths {
@@ -26,20 +25,17 @@ export interface Paths {
 };
 
 export class Edge {
-  label?: number;
-  from: number;
-  to: number;
+  constructor(
+    public from: number,
+    public to: number,
+    public label?: number
+  ) {}
   equals = (other: Edge) => {
     return this.label === other.label && (
       (this.from === other.from && this.to === other.to) ||
       (this.from === other.to && this.to === other.from)
     )
   };
-  constructor(from: number, to: number, label?: number) {
-    this.from = from;
-    this.to = to;
-    this.label = label;
-  }
 };
 
 export interface TraversalRecord {

@@ -1,10 +1,7 @@
 import React from 'react';
 import CSS from 'csstype';
+import { Position } from '../logic/commonInterfaces'
 
-interface Position {
-  x: number;
-  y: number;
-}
 
 function getEdgePositionUsingPythagoras(from: Position, to: Position) :
   [Position, number, number]
