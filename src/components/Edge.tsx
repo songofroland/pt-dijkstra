@@ -21,7 +21,8 @@ function Edge({from, to, label}
     from: Position,
     to: Position,
     label?: string
-  }) {
+  })
+{
   const [{ x, y }, length, rotation] = getEdgePositionUsingPythagoras(from, to);
   const style: CSS.Properties = {
     position: 'absolute',
