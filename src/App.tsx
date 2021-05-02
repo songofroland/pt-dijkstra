@@ -9,7 +9,7 @@ import { Graph } from './logic/commonInterfaces';
 import samples from './logic/graphSamples';
 import disassembleGraph from './logic/graphDisassembling';
 import createFrames from './logic/graphFrames';
-import mapGraph from './logic/graphMapping'
+import mapGraph from './logic/graphMapping';
 import labelGraph from './logic/graphLabeling';
 import { DijkstraTracer } from './logic/dijkstra';
 
@@ -19,10 +19,8 @@ function App() {
     const dijkstra = new DijkstraTracer(graph);
     const frames =
       createFrames(disassembledGraph, dijkstra.paths, dijkstra.traversalHistory);
-    const mappedGraph = mapGraph(disassembledGraph);
-    const labeledGraph = labelGraph(mappedGraph);
     return {
-      graph: labeledGraph,
+      graph: labelGraph(mapGraph(disassembledGraph)),
       frames: frames,
     }
   };

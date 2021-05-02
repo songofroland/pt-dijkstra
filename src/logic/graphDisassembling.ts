@@ -7,9 +7,7 @@ export default function dissasembleGraph(graph: Graph): DissasembledGraph {
 }
 
 export function getNodesArray(graph: Graph): Array<number> {
-  //const labels = labelGen();
-  return [];
-  //return Array.from({ length: graph.length }, () => labels.next().value);
+  return Array.from({ length: graph.length }).map((_, i) => i);
 }
 
 /**

@@ -1,4 +1,4 @@
-import { Paths, Edge, TraversalRecord, Frame, DissasembledGraph }
+import { Paths, TraversalRecord, Frame, DissasembledGraph }
   from './commonInterfaces';
 
 export default function createFrames(
