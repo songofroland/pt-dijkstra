@@ -8,7 +8,7 @@ interface Paths {
     [key: number]: Array<number>
 }
 
-interface TraversalRecord{
+interface TraversalRecord {
   node: number,
   lookups: Array<number>
 }
@@ -60,7 +60,7 @@ export class DijkstraTracer{
       this.paths = paths;
     }
   
-    getTraversalFor(node: number): TraversalRecord{
+    getTraversalFor(node: number): TraversalRecord {
       return {
         node: node,
         lookups: this.#graph[node].flatMap((cost, node) => cost === 0 ? []: node),

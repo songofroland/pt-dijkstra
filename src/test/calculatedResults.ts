@@ -28,7 +28,7 @@ export const expectedPathsFromFirstNode = {
   6: [0, 1, 3, 4],
 };
 
-export const expectedHistoryFromFirstNode =  [
+export const expectedHistoryFromFirstNode = [
   { node: 0, lookups: [ 1, 2 ] },
   { node: 1, lookups: [ 0, 3 ] },
   { node: 2, lookups: [ 0, 3 ] },
