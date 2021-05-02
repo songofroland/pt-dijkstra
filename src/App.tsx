@@ -1,31 +1,43 @@
 import './App.css';
 import React from 'react';
-import GraphEditor from './components/GraphEditor';
-import Canvas from './components/Canvas';
-import mapGraph from './logic/graphMapping';
-import { Graph } from './logic/commonInterfaces';
 import { useState } from 'react';
+
+import GraphEditor from './components/GraphEditor';
+import CanvasAnimator from './components/CanvasAnimator';
+
+import { Graph, Frame, MappedGraph, GraphIndex } from './logic/commonInterfaces';
 import samples from './logic/graphSamples';
+import disassembleGraph from './logic/graphDisassembling';
+import createFrames from './logic/graphFrames';
+import mapGraph from './logic/graphMapping'
+import labelGraph from './logic/graphLabeling';
+import { DijkstraTracer } from './logic/dijkstra';
 
 function App() {
-  const [mappedGraph, setMappedGraph] = useState({
-    graph: mapGraph(samples.simple.graph), //TODO handle initial state better
-    path: [],
-  });
+  const processGraph = (graph: Graph) => {
+    const disassembledGraph = disassembleGraph(graph);
+    const dijkstra = new DijkstraTracer(graph);
+    const frames = createFrames(disassembledGraph, dijkstra.paths, dijkstra.traversalHistory);
+    const mappedGraph = mapGraph(disassembledGraph);
+    const labeledGraph = labelGraph(mappedGraph);
+    return {
+      graph: labeledGraph,
+      frames: frames
+    }
+  };
+
+  const [processedGraph, setProcessedGraph] = useState(processGraph(samples.simple.graph));
 
   const editorCallback = (graph: Graph) => {
-    setMappedGraph({
-      graph: mapGraph(graph),
-      path: [],
-    });
+    setProcessedGraph(processGraph(graph));
   };
 
   return (
     <div className="app">
       <h1>Dijkstra is cool guy!</h1>
-      <Canvas
-        nodes={mappedGraph.graph[0]}
-        edges={mappedGraph.graph[1]} />
+      <CanvasAnimator
+        graph={processedGraph.graph}
+        frames={processedGraph.frames} />
       <GraphEditor onRender={editorCallback}/>
     </div>
   );

@@ -1,24 +1,20 @@
-import { Paths, Edge, TraversalRecord } from './commonInterfaces';
+import { Paths, Edge, TraversalRecord, Frame, DissasembledGraph }
+  from './commonInterfaces';
 
-interface Frame {
-  inactiveEdges: Array<Edge>,
-  activeEdges: Array<Edge>,
-};
-
-export function createFrames(
-  edges: Array<Edge>,
+export default function createFrames(
+  dissasembledGraph: DissasembledGraph,
   nodePaths: Paths,
-  traversalHistory: TraversalRecord,
+  traversalHistory: Array<TraversalRecord>,
 ):
   Array<Frame>
 {
   return [ // Temorary fixed result
     { //frame 1
       inactiveEdges: [],
-      activeEdges: [edges[0]],
+      activeEdges: [dissasembledGraph[1][0]],
     },
     { //frame 2
-      inactiveEdges: [edges[0]],
+      inactiveEdges: [dissasembledGraph[1][0]],
       activeEdges: [],
     }
   ]
