@@ -4,11 +4,11 @@ import {
   Edge,
   MappedGraph,
   GraphIndex,
-  DissasembledGraph,
+  DisassembledGraph,
 } from './commonInterfaces';
 
 
-export default function mapGraph(graph: DissasembledGraph): MappedGraph {
+export default function mapGraph(graph: DisassembledGraph): MappedGraph {
   return calcNodes(graph[GraphIndex.NODES], graph[GraphIndex.EDGES]);
 }
 

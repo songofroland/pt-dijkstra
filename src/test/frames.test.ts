@@ -1,11 +1,20 @@
 import createFrames from '../logic/graphFrames';
 import { createFramesWithEdges } from '../logic/graphFrames';
+import { Algorithm, DisassembledGraph, Edge } from '../logic/commonInterfaces';
 
+const graph: DisassembledGraph = [[0, 1], [new Edge(0, 1)]];
+const alg: Algorithm = {
+  traversalHistory: [{ node: 0, lookups: [1] }],
+  paths: {
+    0: [],
+    1: [0],
+  },
+};
 
-test('frames creation', () => {
-  const generator = labelGen();
-  const results = Array.from({ length: 55 }, () => generator.next().value);
-  expect(results.slice(0, 3)).toStrictEqual(['A', 'B', 'C']);
-  expect(results.slice(26, 29)).toStrictEqual(['AA', 'AB', 'AC']);
-  expect(results.slice(52, 55)).toStrictEqual(['BA', 'BB', 'BC']);
+const frames = createFrames(graph, alg)
+
+test('First frame is empty', () => {
+  const f = frames[0];
+  expect(f.activeEdges.length).toStrictEqual(0)
+  expect(f.inactiveEdges.length).toStrictEqual(0)
 });
