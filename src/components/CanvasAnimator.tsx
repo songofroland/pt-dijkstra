@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Frame, GraphIndex, LabeledGraph } from '../logic/commonInterfaces';
 import Canvas from './Canvas';
-import { useState } from 'react';
 
 const MS_PER_FRAME = 1000
 
@@ -12,18 +11,20 @@ function CanvasAnimator({ graph, frames }
   }) {
   const [animation, setAnimation] = useState({
     started: true,
-    frameNum: 0
+    frameNum: 0,
   });
 
-  if (animation.started) {
-    setTimeout(() => {
-      let nextFrame = animation.frameNum + 1;
-      if (nextFrame === frames.length) {
-        nextFrame = 0
-      }
-      setAnimation({ ...animation, frameNum: nextFrame });
-    }, MS_PER_FRAME);
-  }
+  useEffect(() => {
+    if (animation.started) {
+      setTimeout(() => {
+        let nextFrame = animation.frameNum + 1;
+        if (nextFrame === frames.length) {
+          nextFrame = 0;
+        }
+        setAnimation({ ...animation, frameNum: nextFrame });
+      }, MS_PER_FRAME);
+    }
+  });
 
   return <>
     <Canvas

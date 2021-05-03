@@ -6,6 +6,9 @@ export default function createFrames(
 ):
   Array<Frame>
 {
+  const edgeFrames = createFramesWithEdges(algorithm);
+  //return findIndexes(dissasembledGraph, edgeFrames);
+
   return [ // Temporary fixed result
     { //frame 1
       inactiveEdges: [],
@@ -17,3 +20,9 @@ export default function createFrames(
     },
   ]
 }
+
+export function createFramesWithEdges(from: Algorithm) {
+
+}
+
+
