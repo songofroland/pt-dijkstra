@@ -9,10 +9,10 @@ export default function createFrames(
   return [ // Temporary fixed result
     { //frame 1
       inactiveEdges: [],
-      activeEdges: [dissasembledGraph[1][0]],
+      activeEdges: [0],
     },
     { //frame 2
-      inactiveEdges: [dissasembledGraph[1][0]],
+      inactiveEdges: [0],
       activeEdges: [],
     },
   ]

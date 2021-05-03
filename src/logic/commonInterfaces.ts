@@ -58,6 +58,6 @@ export interface TraversalRecord {
 };
 
 export interface Frame {
-  inactiveEdges: Array<Edge>,
-  activeEdges: Array<Edge>,
+  inactiveEdges: Array<number>,
+  activeEdges: Array<number>,
 };
