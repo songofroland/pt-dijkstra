@@ -54,13 +54,13 @@
   max-width: 100%;
 }
 
-.valid-base {
-  display: flex;
-  justify-content: center;
-  place-items: center;
-}
-.valid > * {
+.invisible {
   opacity: 0;
+}
+
+.error{
+  font-size: 1.5rem;
+  color: red;
 }
 
 textarea {
