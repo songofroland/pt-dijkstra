@@ -58,6 +58,6 @@ export interface Algorithm {
 };
 
 export interface Frame {
-  inactiveEdges: Array<number>,
   activeEdges: Array<number>,
+  currentEdges: Array<number>,
 };

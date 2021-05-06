@@ -25,9 +25,9 @@ export default function createFrames(
 
 export function createFramesWithEdges(from: Algorithm) {
   let frames: Array<FrameWithEdges> = [];
-  for (let tr of from.traversalHistory) {
+  for (let travelsal of from.traversalHistory) {
     frames.push(createFrameForNode(frames));
-    frames.push(...createFramesForLookups(tr, frames));
+    frames.push(...createFramesForLookups(travelsal, frames));
   }
   return frames;
 }
@@ -41,7 +41,7 @@ function createFrameForNode(frames: Array<FrameWithEdges>): FrameWithEdges {
 }
 
 function createFramesForLookups(
-  tr: TraversalRecord,
+  travelsal: TraversalRecord,
   frames: Array<FrameWithEdges>,
 ):
   Array<FrameWithEdges>
@@ -49,10 +49,10 @@ function createFramesForLookups(
   const nodeFrames: Array<FrameWithEdges> = [
     frames[frames.length - 1] || { activeEdges: [], inactiveEdges: [] },
   ];
-  for (let toNode of tr.lookups) {
+  for (let toNode of travelsal.lookups) {
     const lastFrame = nodeFrames[nodeFrames.length - 1];
     nodeFrames.push({
-      activeEdges: [new Edge(tr.node, toNode)],
+      activeEdges: [new Edge(travelsal.node, toNode)],
       inactiveEdges: lastFrame.activeEdges.concat(lastFrame.inactiveEdges),
     });
   }
@@ -70,8 +70,8 @@ function convertToIndexes(
   const graphEdges = graph[GraphIndex.EDGES];
   for (let eFrame of edgeFrames) {
     frames.push({
-      activeEdges: convertEdgeArrayToIdexes(eFrame.activeEdges, graphEdges),
-      inactiveEdges: convertEdgeArrayToIdexes(eFrame.inactiveEdges, graphEdges),
+      currentEdges: convertEdgeArrayToIdexes(eFrame.activeEdges, graphEdges),
+      activeEdges: convertEdgeArrayToIdexes(eFrame.inactiveEdges, graphEdges),
     })
   }
   return frames
@@ -84,9 +84,7 @@ function convertEdgeArrayToIdexes(
   Array<number>
 {
   const indexes: Set<number> = new Set();
-  for (let edge of edgeArray) {
-    indexes.add(findEdgeIndex(edge, graphEdges));
-  }
+  edgeArray.forEach((edge) => indexes.add(findEdgeIndex(edge, graphEdges)));
   return Array.from(indexes);
 }
 

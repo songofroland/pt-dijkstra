@@ -11,7 +11,7 @@ const alg: Algorithm = {
   },
 };
 
-const frames = createFrames(graph, alg)
+const frames = createFrames(graph, alg);
 
 test('Frame count', () => {
   expect(frames.length).toStrictEqual(2);
@@ -19,12 +19,12 @@ test('Frame count', () => {
 
 test('First frame is empty', () => {
   const f = frames[0];
+  expect(f.currentEdges.length).toStrictEqual(0);
   expect(f.activeEdges.length).toStrictEqual(0);
-  expect(f.inactiveEdges.length).toStrictEqual(0);
 });
 
 test('Second frame is active edge', () => {
   const f = frames[1];
-  expect(f.activeEdges.length).toStrictEqual(1);
-  expect(f.inactiveEdges.length).toStrictEqual(0);
+  expect(f.currentEdges.length).toStrictEqual(1);
+  expect(f.activeEdges.length).toStrictEqual(0);
 });

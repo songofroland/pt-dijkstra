@@ -23,8 +23,8 @@ function Canvas({nodes, edges, frame}
         to={edge.to}
         key={id}
         label={edge.label}
-        isActive={frame.activeEdges.includes(id)}
-        isInactive={frame.inactiveEdges.includes(id)} />,
+        isCurrent={frame.currentEdges.includes(id)}
+        isActive={frame.activeEdges.includes(id)} />,
     );
   }
   return <div className="canvas">
