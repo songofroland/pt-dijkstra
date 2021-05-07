@@ -72,6 +72,10 @@
         {
           "code": 90
         }
+      ],
+      "semi": [
+        "error",
+        "always"
       ]
     }
   },

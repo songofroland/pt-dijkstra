@@ -18,7 +18,7 @@ export function isSquare(graph: Graph) : boolean {
 
 function hasZerosOnDiagonal(graph: Graph): boolean {
   for (let i = 0; i < graph.length; i++) {
-    if (graph[i][i] !== 0) return false
+    if (graph[i][i] !== 0) return false;
   }
   return true;
 }

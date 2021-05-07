@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Frame, GraphIndex, LabeledGraph } from '../logic/commonInterfaces';
 import Canvas from './Canvas';
 
-const MS_PER_FRAME = 1000
+const MS_PER_FRAME = 1000;
 
 function CanvasAnimator({ graph, frames }
   : {
@@ -31,7 +31,7 @@ function CanvasAnimator({ graph, frames }
       nodes={graph[GraphIndex.NODES]}
       edges={graph[GraphIndex.EDGES]}
       frame={frames[animation.frameNum]} />
-  </>
+  </>;
 }
 
 export default CanvasAnimator;

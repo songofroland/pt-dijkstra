@@ -13,7 +13,7 @@ export class Edge {
   ) {}
   equals = (other: Edge) => {
     return (this.from === other.from && this.to === other.to) ||
-      (this.from === other.to && this.to === other.from)
+      (this.from === other.to && this.to === other.from);
   };
 };
 export type DisassembledGraph = [Array<number>, Array<Edge>]

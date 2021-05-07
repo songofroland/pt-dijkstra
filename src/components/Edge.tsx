@@ -1,6 +1,6 @@
 import React from 'react';
 import CSS from 'csstype';
-import { Position } from '../logic/commonInterfaces'
+import { Position } from '../logic/commonInterfaces';
 
 const ACTIVE_COLOR = 'blue';
 const CURRENT_COLOR = 'red';

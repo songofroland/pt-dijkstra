@@ -32,7 +32,7 @@ function GraphEditor({ onRender }: { onRender: Function }) {
 
   const chooserCallback = (selectedGraph: string) => {
     setUserInput({ isCorrect: true, text: selectedGraph });
-  }
+  };
 
   return <div className='graph-editor'>
     <textarea onChange={textareaCallback} value={userInput.text} />
@@ -60,7 +60,7 @@ function GraphChooser({ possibleValues, selectCallback }
   return <select onChange={onChange} >
     <option value="">Custom</option>
     {options}
-  </select>
+  </select>;
 }
 
 export default GraphEditor;

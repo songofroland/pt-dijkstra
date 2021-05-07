@@ -4,7 +4,6 @@ import {
   Algorithm,
   Edge,
   TraversalRecord,
-  Paths,
   GraphIndex,
 } from './commonInterfaces';
 
@@ -56,7 +55,7 @@ function createFramesForLookups(
       inactiveEdges: lastFrame.activeEdges.concat(lastFrame.inactiveEdges),
     });
   }
-  nodeFrames.shift() //First frame was repeated
+  nodeFrames.shift(); //First frame was repeated
   return nodeFrames;
 }
 
@@ -72,9 +71,9 @@ function convertToIndexes(
     frames.push({
       currentEdges: convertEdgeArrayToIdexes(eFrame.activeEdges, graphEdges),
       activeEdges: convertEdgeArrayToIdexes(eFrame.inactiveEdges, graphEdges),
-    })
+    });
   }
-  return frames
+  return frames;
 }
 
 function convertEdgeArrayToIdexes(
