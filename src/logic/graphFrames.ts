@@ -69,22 +69,21 @@ function convertToIndexes(
   const graphEdges = graph[GraphIndex.EDGES];
   for (let eFrame of edgeFrames) {
     frames.push({
-      currentEdges: convertEdgeArrayToIdexes(eFrame.activeEdges, graphEdges),
-      activeEdges: convertEdgeArrayToIdexes(eFrame.inactiveEdges, graphEdges),
+      currentEdges: convertEdgesToIdexes(eFrame.activeEdges, graphEdges),
+      activeEdges: convertEdgesToIdexes(eFrame.inactiveEdges, graphEdges),
     });
   }
   return frames;
 }
 
-function convertEdgeArrayToIdexes(
+function convertEdgesToIdexes(
   edgeArray: Array<Edge>,
   graphEdges: Array<Edge>,
 ):
   Array<number>
 {
-  const indexes: Set<number> = new Set();
-  edgeArray.forEach((edge) => indexes.add(findEdgeIndex(edge, graphEdges)));
-  return Array.from(indexes);
+  const indexes: Array<number> = edgeArray.map(edge => findEdgeIndex(edge, graphEdges));
+  return Array.from(new Set(indexes));
 }
 
 function findEdgeIndex(edge: Edge, edgeArray: Array<Edge>): number {

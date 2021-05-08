@@ -9,19 +9,17 @@ function CanvasAnimator({ graph, frames }
     graph: LabeledGraph,
     frames: Array<Frame>,
   }) {
-  const [animation, setAnimation] = useState({
-    started: true,
-    frameNum: 0,
-  });
+  const started = true // TODO useState when play button is available
+  const [frameNum, setFrameNum] = useState(0)
 
   useEffect(() => {
-    if (animation.started) {
+    if (started) {
       setTimeout(() => {
-        let nextFrame = animation.frameNum + 1;
+        let nextFrame = frameNum + 1;
         if (nextFrame === frames.length) {
           nextFrame = 0;
         }
-        setAnimation({ ...animation, frameNum: nextFrame });
+        setFrameNum(nextFrame);
       }, MS_PER_FRAME);
     }
   });
@@ -30,7 +28,7 @@ function CanvasAnimator({ graph, frames }
     <Canvas
       nodes={graph[GraphIndex.NODES]}
       edges={graph[GraphIndex.EDGES]}
-      frame={frames[animation.frameNum]} />
+      frame={frames[frameNum]} />
   </>;
 }
 
