@@ -13,10 +13,10 @@ export class Edge {
   ) {}
   equals = (other: Edge) => {
     return (this.from === other.from && this.to === other.to) ||
-      (this.from === other.to && this.to === other.from)
+      (this.from === other.to && this.to === other.from);
   };
 };
-export type DissasembledGraph = [Array<number>, Array<Edge>]
+export type DisassembledGraph = [Array<number>, Array<Edge>]
 
 
 export interface Position {
@@ -43,11 +43,6 @@ export interface LabeledEdge extends MappedEdge {
 export type LabeledGraph = [Array<LabeledNode>, Array<LabeledEdge>];
 
 
-export interface Algorithm {
-  traversalHistory: Array<TraversalRecord>,
-  paths: Paths,
-};
-
 export interface Paths {
     [key: number]: Array<number>
 };
@@ -57,7 +52,12 @@ export interface TraversalRecord {
   lookups: Array<number>
 };
 
+export interface Algorithm {
+  traversalHistory: Array<TraversalRecord>,
+  paths: Paths,
+};
+
 export interface Frame {
-  inactiveEdges: Array<Edge>,
-  activeEdges: Array<Edge>,
+  activeEdges: Array<number>,
+  currentEdges: Array<number>,
 };

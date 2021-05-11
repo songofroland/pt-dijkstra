@@ -20,7 +20,7 @@ function App() {
     return {
       graph: labelGraph(mapGraph(disassembledGraph)),
       frames: frames,
-    }
+    };
   };
 
   const [processedGraph, setProcessedGraph] =
