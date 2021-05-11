@@ -69,14 +69,14 @@ function convertToIndexes(
   const graphEdges = graph[GraphIndex.EDGES];
   for (let eFrame of edgeFrames) {
     frames.push({
-      currentEdges: convertEdgesToIdexes(eFrame.activeEdges, graphEdges),
-      activeEdges: convertEdgesToIdexes(eFrame.inactiveEdges, graphEdges),
+      currentEdges: convertEdgesToIndexes(eFrame.activeEdges, graphEdges),
+      activeEdges: convertEdgesToIndexes(eFrame.inactiveEdges, graphEdges),
     });
   }
   return frames;
 }
 
-function convertEdgesToIdexes(
+function convertEdgesToIndexes(
   edgeArray: Array<Edge>,
   graphEdges: Array<Edge>,
 ):
