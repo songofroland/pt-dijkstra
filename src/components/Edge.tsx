@@ -1,7 +1,10 @@
 import React from 'react';
 import CSS from 'csstype';
-import { Position } from '../logic/commonInterfaces'
+import { Position } from '../logic/commonInterfaces';
 
+const ACTIVE_COLOR = 'blue';
+const CURRENT_COLOR = 'red';
+const DEFAULT_COLOR = 'white';
 
 function getEdgePositionUsingPythagoras(from: Position, to: Position) :
   [Position, number, number]
@@ -16,19 +19,26 @@ function getEdgePositionUsingPythagoras(from: Position, to: Position) :
   return [first, c, angle];
 }
 
-function Edge({from, to, label}
+function Edge({from, to, label, isCurrent, isActive}
   : {
     from: Position,
     to: Position,
-    label?: string
+    label?: string,
+    isCurrent: boolean,
+    isActive: boolean,
   })
 {
+  const getBgColor = () => {
+    if (isCurrent) return CURRENT_COLOR;
+    if (isActive) return ACTIVE_COLOR;
+    return DEFAULT_COLOR;
+  };
   const [{ x, y }, length, rotation] = getEdgePositionUsingPythagoras(from, to);
   const style: CSS.Properties = {
     position: 'absolute',
     left: `${x}%`,
     top: `${y}%`,
-    backgroundColor: 'white',
+    backgroundColor: `${getBgColor()}`,
     height: '1px',
     width: `${length}%`,
     transformOrigin: 'top left',

@@ -55,8 +55,8 @@ export class DijkstraTracer implements Algorithm {
     getTraversalFor(node: number): TraversalRecord {
       return {
         node: node,
-        lookups: this.#graph[node].flatMap((cost, node) => cost === 0 ? []: node),
-      }
+        lookups: this.#graph[node].flatMap((cost, node) => cost === 0 ? [] : node),
+      };
     }
     
 }

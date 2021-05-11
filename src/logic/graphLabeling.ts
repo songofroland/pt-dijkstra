@@ -18,13 +18,13 @@ export default function labelGraph(graph: MappedGraph): LabeledGraph {
 }
 
 function labelEdges(edges: Array<MappedEdge>): Array<LabeledEdge> {
-  return edges.map(edge => { return { ...edge, label: '' } });
+  return edges.map(edge => { return { ...edge, label: '' }; });
   //TODO place weights as labels
 }
 
 function labelNodes(nodes: Array<MappedNode>): Array<LabeledNode> {
   const labels = labelGen();
-  return nodes.map(node => { return { ...node, label: labels.next().value} });
+  return nodes.map(node => { return { ...node, label: labels.next().value }; });
 }
 
 /**
@@ -43,7 +43,7 @@ export function* labelGen(): Generator<string> {
   };
 
   const increment = (nonDecimalNumber: string) => {
-    let digits = nonDecimalNumber.split('')
+    let digits = nonDecimalNumber.split('');
     let carry = true;
     for (let i = digits.length - 1; i >= 0; i--) {
       if (!carry) break;
