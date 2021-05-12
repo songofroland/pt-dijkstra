@@ -4,7 +4,7 @@ It's simple, fast and extensible. Build on open technologies and with free licen
 
 ![Browser Screenshot](doc/screenshot.jpeg)
 
-## Running it
+## Running the app
 Simply clone the repository and:
 ```
 $ cd pt-dijkstra
@@ -12,7 +12,8 @@ $ yarn start
 ```
 ###### NOTE: You need to have `yarn` installed.
 
-This should open browser. At the moment we don't have live demo. The site is mobile friendly so it should work on any screen size.
+This should open your browser. At the moment we don't have a live demo.
+The site is mobile friendly so it should work on any screen size.
 
 ## Graphs
 Simulator provides few graphs you can try.
@@ -31,11 +32,11 @@ The browser does the heavy lifting, so performance will highly depend on device 
  - React
  - yarn
 
-Since we use Typescript compailer you won't be able to understand generated js looking at it in browser.
+Since we use Typescript compiler you won't be able to understand generated js looking at it in browser.
 
-To debug react there is extension available called "React developer tools" for most popular browsers.
+To debug react there is anan  extension available called "React developer tools" for most popular browsers.
 
-ESLint was used to control coding style. It will generate warnings and errors in terminal after `yarn start` command if code is not styled correctly.
+ESLint was used to control coding style. It will generate warnings and errors in terminal after `yarn start` command if the code is not styled correctly.
 
 ## Hacking
 Want to see how it is build? Or maybe you have different algorithm to show? Either way the code is here for you to modify.
