@@ -17,7 +17,7 @@ The site is mobile friendly so it should work on any screen size.
 
 ## Graphs
 Simulator provides few graphs you can try.
-Additionaly imputing your own graphs is also possible.
+Additionaly inputting your own graphs is also possible.
 
 We don't put a limit on graph sizes.
 Software was tested on graphs with over 50 nodes and it worked smoothly.
