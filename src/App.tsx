@@ -13,6 +13,7 @@ import mapGraph from './logic/graphMapping';
 import labelGraph from './logic/graphLabeling';
 import { DijkstraTracer } from './logic/dijkstra';
 
+
 function App() {
   const processGraph = (graph: Graph) => {
     const disassembledGraph = disassembleGraph(graph);
@@ -22,7 +23,6 @@ function App() {
       frames: frames,
     };
   };
-
   const [processedGraph, setProcessedGraph] =
     useState(processGraph(samples.simple.graph));
 

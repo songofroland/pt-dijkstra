@@ -1,66 +1,93 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { isValid, parseValidGraph } from '../logic/graphParsing';
 import samples from '../logic/graphSamples';
 
 const graphsToChoose = [
   {
-    label: 'Simple Graph',
-    graph: samples.simple.string,
+    label: 'Simple graph',
+    key: 'simple',
   },
   {
-    label: 'Medium Graph',
-    graph: samples.medium.string,
+    label: 'Medium graph',
+    key: 'medium',
+  },
+  {
+    label: 'Custom',
+    key: 'custom',
   },
 ];
 
 
 function GraphEditor({ onRender }: { onRender: Function }) {
-  const [userInput, setUserInput] = useState({
-    isCorrect: true,
-    text: samples.simple.string,
-  });
+  const [inputText, setInputText] = useState(samples.simple.string);
+  const [inputTextIsCorrect, setInputTextIsCorrect] = useState(true);
+  const [selectedGraphId, setSelectedGraphId] = useState('simple');
+  const [customGraphString, setCustomGraphString] = useState('');
 
-  const textareaCallback = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const userText = e.target.value;
-    setUserInput({ isCorrect: isValid(userText), text: userText });
+  useEffect(() => {
+    setInputTextIsCorrect(isValid(inputText));
+  }, [inputText]);  
+
+  const textareaCallback = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInputText(event.target.value);
+    setSelectedGraphId('custom');
+    setCustomGraphString(event.target.value);
   };
 
-  const renderCallback = (e: React.MouseEvent<HTMLInputElement>) => {
-    if (userInput.isCorrect) onRender(parseValidGraph(userInput.text));
+
+  const renderCallback = () => {
+    if (inputTextIsCorrect) {
+      onRender(parseValidGraph(inputText));
+    }
+  };
+  
+  const chooserCallback = (selectedGraphName: string) => {
+    setSelectedGraphId(selectedGraphName);
+    if (selectedGraphName === 'custom'){
+      setInputText(customGraphString);
+    }else{
+      setInputText(samples[selectedGraphName].string); 
+    }
   };
 
-  const chooserCallback = (selectedGraph: string) => {
-    setUserInput({ isCorrect: true, text: selectedGraph });
-  };
-
-  return <div className='graph-editor'>
-    <textarea onChange={textareaCallback} value={userInput.text} />
-    <div className='editor-bar'>
-      <div className={userInput.isCorrect ? 'valid-base valid' : 'valid-base'}>
+  return <>
+    <div className='graph-editor'>
+      <textarea onChange={textareaCallback} value={inputText} />
+      <div className={inputTextIsCorrect? 'invisible' : 'error'}>
         <span>This cannot be converted to graph</span>
       </div>
-      <GraphChooser possibleValues={graphsToChoose} selectCallback={chooserCallback} />
-      <input type='button' value='Render' onClick={renderCallback} />
-    </div>
-  </div>;
+      <div className='editor-bar'>
+        <GraphChooser 
+          possibleValues={graphsToChoose} 
+          selectCallback={chooserCallback} 
+          selectedLabel={selectedGraphId} 
+        />
+        <input type='button' value='Render' onClick={renderCallback} />
+      </div>
+    </div>;
+  </>;
 }
 
-function GraphChooser({ possibleValues, selectCallback }
-  : { possibleValues: any[], selectCallback: Function })
+function GraphChooser({ possibleValues, selectCallback, selectedLabel }
+  : { possibleValues: Array<any>, selectCallback: Function , selectedLabel: string})
 {
-  const onChange = (element: any) => {
+  const onChange = (element: React.ChangeEvent<HTMLSelectElement>) => {
     selectCallback(element.target.selectedOptions[0].value);
   };
 
-  const options = possibleValues.map((value, key) => 
-    <option key={key} value={value.graph}>{value.label}</option>,
+  const options = possibleValues.map(obj =>
+    <option key={obj.key} value={obj.key}>{obj.label}</option>,
   );
 
-  return <select onChange={onChange} >
-    <option value="">Custom</option>
-    {options}
-  </select>;
+
+  return <>
+    <div>
+      <select onChange={onChange} value={selectedLabel}>
+        {options}
+      </select>
+    </div>
+  </>;
 }
 
 export default GraphEditor;
