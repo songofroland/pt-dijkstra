@@ -76,6 +76,7 @@ function getKeyOfMinValue(obj: Costs): number {
   return parseInt(Object.keys(obj).find((key) => obj[parseInt(key)] === minValue)!);
 }
 
-function arrayToObject(arr: Array<any>, defaultValue: any): any{
+function arrayToObject(arr: Array<any>, defaultValue: any): any {
+  // TODO unexpected use of comma operator - line below - col 61
   return arr.reduce((acc, curr) => (acc[curr] = defaultValue, acc), {});
 }
