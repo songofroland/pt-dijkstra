@@ -33,6 +33,14 @@
   color: black;
 }
 
+.edge-label {
+  height: 100%;
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .graph-editor {
   display: flex;
   flex-direction: column;
