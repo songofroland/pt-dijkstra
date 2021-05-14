@@ -10,6 +10,7 @@ export class Edge {
   constructor(
     public from: number,
     public to: number,
+    public label?: string,
   ) {}
   equals = (other: Edge) => {
     return (this.from === other.from && this.to === other.to) ||
@@ -30,6 +31,7 @@ export interface MappedEdge {
   id: number; //TODO remove id
   from: Position,
   to: Position,
+  label?: string,
 };
 export type MappedGraph = [Array<MappedNode>, Array<MappedEdge>];
 

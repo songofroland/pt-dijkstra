@@ -65,7 +65,7 @@ function GraphEditor({ onRender }: { onRender: Function }) {
         />
         <input type='button' value='Render' onClick={renderCallback} />
       </div>
-    </div>;
+    </div>
   </>;
 }
 

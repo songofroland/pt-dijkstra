@@ -21,12 +21,13 @@ function calcNodes(nodes: Array<number>, edges: Array<Edge>):
     x: Math.random() * 100,
     y: Math.random() * 100,
   }));
-  const mappedEdges = edges.map((obj: Edge, i) => {
+  const mappedEdges = edges.map((edge: Edge, i) => {
     const defaultNode = { x: 0, y: 0 };
-    const node1 = mappedNodes.find((e) => e.id === obj.from) ?? defaultNode;
-    const node2 = mappedNodes.find((e) => e.id === obj.to) ?? defaultNode;
+    const node1 = mappedNodes.find((e) => e.id === edge.from) ?? defaultNode;
+    const node2 = mappedNodes.find((e) => e.id === edge.to) ?? defaultNode;
     return {
       id: i,
+      label: edge.label,
       from: { x: node1.x, y: node1.y },
       to: { x: node2.x, y: node2.y },
     };
