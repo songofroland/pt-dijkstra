@@ -29,7 +29,7 @@ export function getEdgesArray(graph: Graph): Array<Edge> {
     for (let to = 0; to < graph[from].length; to++) {
       const cost = graph[from][to];
       const edge = new Edge(from, to, String(cost));
-      if (edge.from !== edge.to && !isDuplicate(edge)) {
+      if (edge.from !== edge.to && !isDuplicate(edge) && cost > 0) {
         edges.add(edge);
       }
     }
