@@ -44,7 +44,11 @@ function Edge({from, to, label, isCurrent, isActive}
     transformOrigin: 'top left',
     transform: `rotate(${rotation}deg)`,
   };
-  return <div style={style}>{label}</div>;
+  return <>
+    <div style={style}>
+      <div className="edge-label">{label}</div>
+    </div>
+  </>;
 }
 
 export default Edge;
