@@ -77,6 +77,6 @@ function getKeyOfMinValue(obj: Costs): number {
 }
 
 function arrayToObject(arr: Array<any>, defaultValue: any): any {
-  // TODO unexpected use of comma operator - line below - col 61
+  //eslint-disable-next-line
   return arr.reduce((acc, curr) => (acc[curr] = defaultValue, acc), {});
 }
