@@ -13,6 +13,10 @@ const graphsToChoose = [
     key: 'medium',
   },
   {
+    label: 'Advanced graph',
+    key: 'advanced',
+  },
+  {
     label: 'Custom',
     key: 'custom',
   },

@@ -34,18 +34,18 @@ function Edge({from, to, label, isCurrent, isActive}
     return DEFAULT_COLOR;
   };
   const [{ x, y }, length, rotation] = getEdgePositionUsingPythagoras(from, to);
-  const style: CSS.Properties = {
+  const edgeStyle: CSS.Properties = {
     position: 'absolute',
     left: `${x}%`,
     top: `${y}%`,
     backgroundColor: `${getBgColor()}`,
-    height: '1px',
+    height: '2px',
     width: `${length}%`,
     transformOrigin: 'top left',
     transform: `rotate(${rotation}deg)`,
   };
   return <>
-    <div style={style}>
+    <div style={edgeStyle}>
       <div className="edge-label">{label}</div>
     </div>
   </>;

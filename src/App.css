@@ -16,17 +16,15 @@
 .canvas {
   background-color: var(--element-background);
   position: relative;
-  height: 60vmin;
-  width: 60vmin;
-  min-height: 60vmin;
-  min-width: 60vmin;
+  height: 70vmin;
+  width: 70vmin;
 }
 
 .node {
   height: 2vh;
   width: 2vh;
   border-radius: 50%;
-  font-size: 2vh;
+  font-size: 1.65vh;
   text-align: center;
   vertical-align: middle;
   background-color: white;
@@ -36,6 +34,8 @@
 .edge-label {
   height: 100%;
   width: 100%;
+  margin-top: -2vh;
+  font-size: 2.5vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@
   flex-direction: column;
   align-items: stretch;
   resize: none;
-  width: 70vw;
+  width: 80vmin;
 }
 
 .editor-bar {
@@ -75,7 +75,7 @@
 textarea {
   margin: 10px;
   min-height: 10em;
-  resize: none;
+  font-size: 1.5em;
 }
 
 @media (max-width: 480px) {
