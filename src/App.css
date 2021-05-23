@@ -16,15 +16,16 @@
 .canvas {
   background-color: var(--element-background);
   position: relative;
-  height: 70vmin;
-  width: 70vmin;
+  height: 60vmin;
+  width: 60vmin;
+  font-size: 1vmin;
 }
 
 .node {
   height: 2vh;
   width: 2vh;
   border-radius: 50%;
-  font-size: 1.65vh;
+  font-size: 1.65em;
   text-align: center;
   vertical-align: middle;
   background-color: white;
@@ -35,7 +36,7 @@
   height: 100%;
   width: 100%;
   margin-top: -2vh;
-  font-size: 2.5vh;
+  font-size: 2.5em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +55,7 @@
   flex-direction: row;
   justify-content: flex-end;
   min-height: 1em;
-  margin: 10px;
+  margin: 5px;
 }
 
 .editor-bar > * {
@@ -73,9 +74,9 @@
 }
 
 textarea {
-  margin: 10px;
-  min-height: 10em;
-  font-size: 1.5em;
+  margin-top: 10px;
+  min-height: 8.3em;
+  font-size: 1.3em;
 }
 
 @media (max-width: 480px) {
