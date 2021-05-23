@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Frame, GraphIndex, LabeledGraph } from '../logic/commonInterfaces';
 import Canvas from './Canvas';
 
-const MS_PER_FRAME = 1000;
+const MS_PER_FRAME = 1650;
 
 function CanvasAnimator({ graph, frames }
   : {
