@@ -12,7 +12,7 @@ import createFrames from './logic/graphFrames';
 import mapGraph from './logic/graphMapping';
 import labelGraph from './logic/graphLabeling';
 import { DijkstraTracer } from './logic/dijkstra';
-import Desc from './components/Desc';
+import Description from './components/Description';
 
 
 const processGraph = (graph: Graph) => {
@@ -36,7 +36,7 @@ function App() {
         <CanvasAnimator
           graph={parsedGraph.graph}
           frames={parsedGraph.frames} />
-        <Desc />
+        <Description />
         <GraphEditor onRender={editorCallback} />
       </main>
     </div>

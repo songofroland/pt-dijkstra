@@ -16,13 +16,14 @@
 main {
   display: grid;
   grid-template-areas:
-    'canvas desc'
+    'canvas description'
     'canvas editor';
-  gap: 1rem;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
-.desc {
-  grid-area: desc;
+.description {
+  grid-area: description;
 }
 
 .canvas {
@@ -96,7 +97,7 @@ textarea {
 @media (max-width: 640px) {
   main {
     grid-template-areas:
-      'desc'
+      'description'
       'canvas'
       'editor';
   }

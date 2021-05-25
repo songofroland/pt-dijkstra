@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function Desc() {
+export default function Description() {
   return <>
-    <div className="desc">
+    <div className="description">
       Lorem ipsum dolor sit amet consectetur adipisicing elit.<br/>
       Quam eveniet placeat mollitia unde iusto labore molestiae,<br/>
       blanditiis impedit aperiam veniam non, aliquid assumenda,<br/>
