@@ -6,20 +6,31 @@ import {
   GraphIndex,
   DisassembledGraph,
 } from './commonInterfaces';
+const rand = require('random-seed');
 
 
 export default function mapGraph(graph: DisassembledGraph): MappedGraph {
   return calcNodes(graph[GraphIndex.NODES], graph[GraphIndex.EDGES]);
 }
 
+function* typedGenerator(seed: string) : Generator<number> {
+  const gen = new rand(seed);
+  while (true) {
+    yield gen.random();
+  }
+}
+
 function calcNodes(nodes: Array<number>, edges: Array<Edge>):
   [Array<MappedNode>, Array<MappedEdge>]
 {
+  const seed = nodes.toString() + edges.toString();
+  const gen = typedGenerator(seed);
+
   // TODO better node placing
   const mappedNodes = nodes.map((l, i) => ({
     id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
+    x: gen.next().value * 100,
+    y: gen.next().value * 100,
   }));
   const mappedEdges = edges.map((edge: Edge, i) => {
     const defaultNode = { x: 0, y: 0 };
