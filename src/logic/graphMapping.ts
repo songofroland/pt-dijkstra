@@ -5,6 +5,7 @@ import {
   MappedGraph,
   GraphIndex,
   DisassembledGraph,
+  Position,
 } from './commonInterfaces';
 const rand = require('random-seed');
 
@@ -20,24 +21,51 @@ function* typedGenerator(seed: string) : Generator<number> {
   }
 }
 
+function getDissallowedRadiusBasedOnDensity(numberOfNodes: number): number {
+  // This should do the job just fine. Might change later.
+  return Math.floor((1 / numberOfNodes) * 100);
+}
+
+function isAllowed(
+  position: Position,
+  usedPositions: Array<Position>,
+  disallowedRadius: number,
+) : boolean
+{
+  return true;
+}
+
+function* positionGenerator(rng: Generator<number>, disallowedRadius: number)
+  : Generator<Position>
+{
+  const usedPositions: Array<Position> = [];
+  while (true) {
+    const position = {
+      x: rng.next().value * 100,
+      y: rng.next().value * 100,
+    };
+    if (isAllowed(position, usedPositions, disallowedRadius)) {
+      usedPositions.push(position);
+      yield position;
+    }
+  }
+}
+
 function calcNodes(nodes: Array<number>, edges: Array<Edge>):
   [Array<MappedNode>, Array<MappedEdge>]
 {
   const seed = nodes.toString() + edges.toString();
   const gen = typedGenerator(seed);
+  const dissallowedRadius = getDissallowedRadiusBasedOnDensity(nodes.length);
+  const positions = positionGenerator(gen, dissallowedRadius);
+  console.log(dissallowedRadius);
 
-  // TODO better node placing
-  const mappedNodes = nodes.map((l, i) => ({
-    id: i,
-    x: gen.next().value * 100,
-    y: gen.next().value * 100,
-  }));
+  const mappedNodes = nodes.map(_ => positions.next().value);
   const mappedEdges = edges.map((edge: Edge, i) => {
     const defaultNode = { x: 0, y: 0 };
-    const node1 = mappedNodes.find((e) => e.id === edge.from) ?? defaultNode;
-    const node2 = mappedNodes.find((e) => e.id === edge.to) ?? defaultNode;
+    const node1 = mappedNodes.find((_, i) => i === edge.from) ?? defaultNode;
+    const node2 = mappedNodes.find((_, i) => i === edge.to) ?? defaultNode;
     return {
-      id: i,
       label: edge.label,
       from: { x: node1.x, y: node1.y },
       to: { x: node2.x, y: node2.y },
