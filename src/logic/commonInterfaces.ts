@@ -24,11 +24,10 @@ export interface Position {
   x: number;
   y: number;
 };
-export interface MappedNode extends Position {
-  id: number; //TODO remove id
-};
+
+export interface MappedNode extends Position {};
+
 export interface MappedEdge {
-  id: number; //TODO remove id
   from: Position,
   to: Position,
   label?: string,
