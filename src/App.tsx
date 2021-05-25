@@ -12,6 +12,7 @@ import createFrames from './logic/graphFrames';
 import mapGraph from './logic/graphMapping';
 import labelGraph from './logic/graphLabeling';
 import { DijkstraTracer } from './logic/dijkstra';
+import Desc from './components/Desc';
 
 
 const processGraph = (graph: Graph) => {
@@ -28,15 +29,18 @@ function App() {
 
   const editorCallback = (graph: Graph) => setParsedGraph(processGraph(graph));
 
-  return (
+  return <>
     <div className="app">
       <h1>Dijkstra is cool guy!</h1>
-      <CanvasAnimator
-        graph={parsedGraph.graph}
-        frames={parsedGraph.frames} />
-      <GraphEditor onRender={editorCallback}/>
+      <main>
+        <CanvasAnimator
+          graph={parsedGraph.graph}
+          frames={parsedGraph.frames} />
+        <Desc />
+        <GraphEditor onRender={editorCallback} />
+      </main>
     </div>
-  );
+  </>;
 }
 
 export default App;
