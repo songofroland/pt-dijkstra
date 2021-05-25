@@ -23,7 +23,7 @@ function* typedGenerator(seed: string) : Generator<number> {
 
 function getDissallowedRadiusBasedOnDensity(numberOfNodes: number): number {
   // This should do the job just fine. Might change later.
-  return Math.floor((1 / numberOfNodes) * 100);
+  return Math.floor((1 / Math.pow(numberOfNodes, 2)) * 100);
 }
 
 function isAllowed(
@@ -32,6 +32,18 @@ function isAllowed(
   disallowedRadius: number,
 ) : boolean
 {
+  const getDistance = (a: Position, b: Position) => {
+    return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(b.y - b.y, 2));
+  };
+
+  const isOneAllowed = (p: Position) => {
+    const distance = getDistance(p, position);
+    return distance > disallowedRadius;
+  };
+
+  for (let checking of usedPositions) {
+    if (!isOneAllowed(checking)) return false;
+  }
   return true;
 }
 
@@ -58,9 +70,9 @@ function calcNodes(nodes: Array<number>, edges: Array<Edge>):
   const gen = typedGenerator(seed);
   const dissallowedRadius = getDissallowedRadiusBasedOnDensity(nodes.length);
   const positions = positionGenerator(gen, dissallowedRadius);
-  console.log(dissallowedRadius);
 
   const mappedNodes = nodes.map(_ => positions.next().value);
+
   const mappedEdges = edges.map((edge: Edge, i) => {
     const defaultNode = { x: 0, y: 0 };
     const node1 = mappedNodes.find((_, i) => i === edge.from) ?? defaultNode;
