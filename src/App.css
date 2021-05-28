@@ -13,11 +13,25 @@
   justify-content: space-evenly;
 }
 
+main {
+  display: grid;
+  grid-template-areas:
+    'canvas description'
+    'canvas editor';
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.description {
+  grid-area: description;
+}
+
 .canvas {
+  grid-area: canvas;
   background-color: var(--element-background);
   position: relative;
-  height: 60vmin;
-  width: 60vmin;
+  height: 70vmin;
+  width: 70vmin;
   font-size: 1vmin;
 }
 
@@ -43,6 +57,7 @@
 }
 
 .graph-editor {
+  grid-area: editor;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -79,7 +94,13 @@ textarea {
   font-size: 1.3em;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
+  main {
+    grid-template-areas:
+      'description'
+      'canvas'
+      'editor';
+  }
   .canvas {
     height: 90vmin;
     width: 90vmin;
