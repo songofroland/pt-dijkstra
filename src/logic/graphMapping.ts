@@ -9,6 +9,10 @@ import {
 } from './commonInterfaces';
 const rand = require('random-seed');
 
+const SWITCH_ALGORITHM_ABOVE_X_NODES = 10;
+const CIRCLE_RADIUS = 40;
+
+
 
 export default function mapGraph(graph: DisassembledGraph): MappedGraph {
   return calcNodes(graph[GraphIndex.NODES], graph[GraphIndex.EDGES]);
@@ -63,15 +67,41 @@ function* positionGenerator(rng: Generator<number>, disallowedRadius: number)
   }
 }
 
-function calcNodes(nodes: Array<number>, edges: Array<Edge>):
-  [Array<MappedNode>, Array<MappedEdge>]
-{
+function placeRandomly(nodes: Array<number>, edges: Array<Edge>): Array<MappedNode> {
   const seed = nodes.toString() + edges.toString();
   const gen = typedGenerator(seed);
   const dissallowedRadius = getDissallowedRadiusBasedOnDensity(nodes.length);
   const positions = positionGenerator(gen, dissallowedRadius);
 
-  const mappedNodes = nodes.map(_ => positions.next().value);
+  return nodes.map(_ => positions.next().value);
+}
+
+function getPositionOnCircle(angle: number, radius: number, center: Position): Position {
+  // (x, y) = (xO + r * cos(theta), yO + r * sin(theta))
+  const theta = (Math.PI / 180) * angle;
+  const x = center.x + (radius * Math.cos(theta));
+  const y = center.y + (radius * Math.sin(theta));
+  return { x, y };
+}
+
+function placeOnCircle(nodes: Array<number>, edges: Array<Edge>): Array<MappedNode> {
+  const angleStep = 360 / nodes.length;
+  const center = { x: 50, y: 50 };
+  return nodes.map((node: number) =>
+    getPositionOnCircle(node * angleStep, CIRCLE_RADIUS, center));
+}
+
+function placeNodes(nodes: Array<number>, edges: Array<Edge>): Array<MappedNode> {
+  if (nodes.length > SWITCH_ALGORITHM_ABOVE_X_NODES) {
+    return placeRandomly(nodes, edges);
+  }
+  return placeOnCircle(nodes, edges);
+}
+
+function calcNodes(nodes: Array<number>, edges: Array<Edge>):
+  [Array<MappedNode>, Array<MappedEdge>]
+{
+  const mappedNodes = placeNodes(nodes, edges);
 
   const mappedEdges = edges.map((edge: Edge, i) => {
     const defaultNode = { x: 0, y: 0 };
