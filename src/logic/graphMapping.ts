@@ -30,8 +30,8 @@ function placeEdges(mappedNodes: Array<MappedNode>, edges: Array<Edge>): Array<M
   const defaultNode = { x: 0, y: 0 };
   return edges.map((edge: Edge, i) => {
 
-    const nodeFrom = mappedNodes.find((_, i) => i === edge.from) ?? defaultNode;
-    const nodeTo = mappedNodes.find((_, i) => i === edge.to) ?? defaultNode;
+    const nodeFrom = mappedNodes.find((_, id) => id === edge.from) ?? defaultNode;
+    const nodeTo = mappedNodes.find((_, id) => id === edge.to) ?? defaultNode;
 
     return {
       label: edge.label,
