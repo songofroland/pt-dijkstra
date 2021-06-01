@@ -10,7 +10,7 @@ import {
 const rand = require('random-seed');
 
 const PLACE_RANDOMLY_ABOVE_X_NODES = 10;
-const CIRCLE_RADIUS = 40;
+const CIRCLE_RADIUS_PERCENT = 40;
 
 
 interface NodePlacemntAlgorithm {
