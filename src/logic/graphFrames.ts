@@ -74,15 +74,12 @@ function addNodeFrameData(
   visitedNodes: Array<number>,
 ): Array<FrameWithEdgesAndNodes> 
 {
-  const framesWithNodeData = [];
-  for (let frame of frames){
-    framesWithNodeData.push({
+  return frames.map(frame => {
+    return {
       ...frame,
       activeNode: activeNode,
-      visitedNodes: [...visitedNodes],
-    });
-  }
-  return framesWithNodeData;
+      visitedNodes: [...visitedNodes]};
+  });
 }
 
 function convertToIndexes(
