@@ -59,6 +59,8 @@ export interface Algorithm {
 };
 
 export interface Frame {
-  activeEdges: Array<number>,
+  visitedNodes: Array<number>,
+  currentNode: number,
+  processedEdges: Array<number>,
   currentEdges: Array<number>,
 };

@@ -1,6 +1,6 @@
 :root {
-  --background-color: #282c34;
-  --element-background: #2d323b;
+  --background-color: #363b46;
+  --element-background: #404855;
 }
 
 .app {
@@ -24,6 +24,7 @@ main {
 
 .description {
   grid-area: description;
+  font-size: 1.1rem;
 }
 
 .canvas {
@@ -36,13 +37,12 @@ main {
 }
 
 .node {
+  /* Some styles are applied dynamically */
   height: 2vh;
   width: 2vh;
-  border-radius: 50%;
   font-size: 1.65em;
   text-align: center;
   vertical-align: middle;
-  background-color: white;
   color: black;
 }
 

@@ -1,5 +1,4 @@
 import createFrames from '../logic/graphFrames';
-import { createFramesWithEdges } from '../logic/graphFrames';
 import { Algorithm, DisassembledGraph, Edge } from '../logic/commonInterfaces';
 
 const graph: DisassembledGraph = [[0, 1], [new Edge(0, 1)]];
@@ -20,11 +19,11 @@ test('Frame count', () => {
 test('First frame is empty', () => {
   const f = frames[0];
   expect(f.currentEdges.length).toStrictEqual(0);
-  expect(f.activeEdges.length).toStrictEqual(0);
+  expect(f.processedEdges.length).toStrictEqual(0);
 });
 
 test('Second frame is active edge', () => {
   const f = frames[1];
   expect(f.currentEdges.length).toStrictEqual(1);
-  expect(f.activeEdges.length).toStrictEqual(0);
+  expect(f.processedEdges.length).toStrictEqual(0);
 });

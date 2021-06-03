@@ -2,7 +2,7 @@
 Dijkstra algorithm simulator running in browser.
 It's simple, fast and extensible. Build on open technologies and with free license. Try it yourself!
 
-![Browser Screenshot](doc/screenshot.jpeg)
+![Browser Screenshot](doc/screenshot.jpg)
 
 ## Running the app
 Simply clone the repository and:
