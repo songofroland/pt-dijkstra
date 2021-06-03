@@ -12,14 +12,14 @@ function Canvas({nodes, edges, frame}
     frame: Frame,
   })
 {
-  const nodeComponents = nodes.map( node =>
-    <Node x={node.x} y={node.y} label={node.label} key={node.id} />,
+  const nodeComponents = nodes.map( (node, id) =>
+    <Node x={node.x} y={node.y} label={node.label} key={id} />,
   );
   const edgeComponents = edges.map( (edge, id) =>
     <Edge 
       from={edge.from} 
       to={edge.to} 
-      key={edge.id} 
+      key={id} 
       label={edge.label} 
       isCurrent={frame.currentEdges.includes(id)} 
       isActive={frame.activeEdges.includes(id)}
