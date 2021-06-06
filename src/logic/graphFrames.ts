@@ -7,10 +7,17 @@ import {
   GraphIndex,
 } from './commonInterfaces';
 
+
+// TODO: Refactor the function chain
 interface FrameWithEdges {
-  activeEdges: Array<Edge>,
-  inactiveEdges: Array<Edge>,
+  processedEdges: Array<Edge>,
+  unvisitedEdges: Array<Edge>,
 };
+
+interface FrameWithEdgesAndNodes extends FrameWithEdges{
+  visitedNodes: Array<number>,
+  activeNode: number
+}
 
 export default function createFrames(
   dissasembledGraph: DisassembledGraph,
@@ -18,50 +25,66 @@ export default function createFrames(
 ):
   Array<Frame>
 {
-  const edgeFrames = createFramesWithEdges(algorithm);
-  return convertToIndexes(dissasembledGraph, edgeFrames);
-}
-
-export function createFramesWithEdges(from: Algorithm) {
-  let frames: Array<FrameWithEdges> = [];
-  for (let travelsal of from.traversalHistory) {
-    frames.push(createFrameForNode(frames));
-    frames.push(...createFramesForLookups(travelsal, frames));
+  let frames: Array<FrameWithEdgesAndNodes> = [];
+  const visitedNodes : Array<number> = [];
+  for (let travelsal of algorithm.traversalHistory) {
+    const framesWithEdgeData = [
+      createFrameForNode(frames), ...createFramesForLookups(travelsal, frames),
+    ];
+    frames.push(...addNodeFrameData(framesWithEdgeData, travelsal.node, visitedNodes));
+    visitedNodes.push(travelsal.node);
   }
-  return frames;
+  return convertToIndexes(dissasembledGraph, frames);
 }
 
-function createFrameForNode(frames: Array<FrameWithEdges>): FrameWithEdges {
-  const lastFrame = frames[frames.length - 1] || { activeEdges: [], inactiveEdges: [] };
+function createFrameForNode(
+  frames: Array<FrameWithEdgesAndNodes>,
+): FrameWithEdges 
+{
+  const lastFrame = frames[frames.length - 1] || {processedEdges: [], unvisitedEdges: []};
   return {
-    activeEdges: [],
-    inactiveEdges: lastFrame.activeEdges.concat(lastFrame.inactiveEdges),
+    processedEdges: [],
+    unvisitedEdges: lastFrame.processedEdges.concat(lastFrame.unvisitedEdges),
   };
 }
 
 function createFramesForLookups(
-  travelsal: TraversalRecord,
+  travelsal: TraversalRecord, 
   frames: Array<FrameWithEdges>,
 ):
   Array<FrameWithEdges>
 {
   const nodeFrames: Array<FrameWithEdges> = [
-    frames[frames.length - 1] || { activeEdges: [], inactiveEdges: [] },
+    frames[frames.length - 1] || { processedEdges: [], unvisitedEdges: [] },
   ];
   for (let toNode of travelsal.lookups) {
     const lastFrame = nodeFrames[nodeFrames.length - 1];
     nodeFrames.push({
-      activeEdges: [new Edge(travelsal.node, toNode)],
-      inactiveEdges: lastFrame.activeEdges.concat(lastFrame.inactiveEdges),
+      processedEdges: [new Edge(travelsal.node, toNode)],
+      unvisitedEdges: lastFrame.processedEdges.concat(lastFrame.unvisitedEdges),
     });
   }
   nodeFrames.shift(); //First frame was repeated
   return nodeFrames;
 }
 
+function addNodeFrameData(
+  frames: Array<FrameWithEdges>, 
+  activeNode: number,
+  visitedNodes: Array<number>,
+): Array<FrameWithEdgesAndNodes> 
+{
+  return frames.map(frame => {
+    return {
+      ...frame,
+      activeNode: activeNode,
+      visitedNodes: [...visitedNodes]};
+  });
+}
+
 function convertToIndexes(
   graph: DisassembledGraph,
-  edgeFrames: Array<FrameWithEdges>,
+  edgeFrames: Array<FrameWithEdgesAndNodes>,
 ):
   Array<Frame>
 {
@@ -69,8 +92,10 @@ function convertToIndexes(
   const graphEdges = graph[GraphIndex.EDGES];
   for (let eFrame of edgeFrames) {
     frames.push({
-      currentEdges: convertEdgesToIndexes(eFrame.activeEdges, graphEdges),
-      activeEdges: convertEdgesToIndexes(eFrame.inactiveEdges, graphEdges),
+      visitedNodes: eFrame.visitedNodes,
+      currentNode: eFrame.activeNode,
+      currentEdges: convertEdgesToIndexes(eFrame.processedEdges, graphEdges),
+      processedEdges: convertEdgesToIndexes(eFrame.unvisitedEdges, graphEdges),
     });
   }
   return frames;

@@ -3,7 +3,6 @@ import {
   MappedNode,
   Edge,
   MappedGraph,
-  GraphIndex,
   DisassembledGraph,
   Position,
 } from './commonInterfaces';
@@ -22,11 +21,12 @@ export default function mapGraph(graph: DisassembledGraph): MappedGraph {
 
   const mappedNodes = placeNodes(nodes, edges);
   const mappedEdges = placeEdges(mappedNodes, edges);
-  
+
   return [mappedNodes, mappedEdges];
 }
 
-function placeEdges(mappedNodes: Array<MappedNode>, edges: Array<Edge>): Array<MappedEdge> {
+function placeEdges(mappedNodes: Array<MappedNode>, edges: Array<Edge>):
+  Array<MappedEdge> {
   const defaultNode = { x: 0, y: 0 };
   return edges.map((edge: Edge, i) => {
 
@@ -44,7 +44,7 @@ function placeEdges(mappedNodes: Array<MappedNode>, edges: Array<Edge>): Array<M
 
 function placeNodes(nodes: Array<number>, edges: Array<Edge>): Array<MappedNode> {
   const useRandom = nodes.length > PLACE_RANDOMLY_ABOVE_X_NODES;
-  const placementAlgorithm = useRandom ? new RandomPlacement : new CirclePlacement;
+  const placementAlgorithm = useRandom ? new RandomPlacement() : new CirclePlacement();
   return placementAlgorithm.place(nodes, edges);
 }
 
@@ -54,7 +54,7 @@ class CirclePlacement implements NodePlacemntAlgorithm {
     const angleStep = 360 / nodes.length;
     const center = { x: 50, y: 50 };
     return nodes.map((node: number) =>
-      this.getPositionOnCircle(node * angleStep, CIRCLE_RADIUS, center));
+      this.getPositionOnCircle(node * angleStep, CIRCLE_RADIUS_PERCENT, center));
   }
 
   getPositionOnCircle(angle: number, radius: number, center: Position): Position {
@@ -117,7 +117,7 @@ class RandomPlacement implements NodePlacemntAlgorithm {
         if (!isOneAllowed(checking)) return false;
       }
       return true;
-    }
+    };
 
     while (true) {
       const position = {

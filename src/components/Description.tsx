@@ -3,10 +3,11 @@ import React from 'react';
 export default function Description() {
   return <>
     <div className="description">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit.<br/>
-      Quam eveniet placeat mollitia unde iusto labore molestiae,<br/>
-      blanditiis impedit aperiam veniam non, aliquid assumenda,<br/>
-      eaque libero eius ab architecto! Ipsum, veniam.<br/>
+        Dijkstra&apos;s algorithm to find the shortest path between a and b.
+        It picks the unvisited vertex with the lowest distance,<br/>calculates 
+        the distance through it to each unvisited neighbor, and updates the 
+        neighbor&apos;s distance if smaller.<br/> 
+        Mark visited (set to blue) when done with neighbors. 
     </div>
   </>;
 }
