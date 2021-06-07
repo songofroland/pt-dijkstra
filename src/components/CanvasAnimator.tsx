@@ -14,12 +14,17 @@ function CanvasAnimator({ graph, frames }
   useEffect(() => {
     setTimeout(() => {
       let nextFrame = frameNum + 1;
-      if (nextFrame === frames.length) {
+      if (frames[nextFrame] === undefined) {
         nextFrame = 0;
       }
       setFrameNum(nextFrame);
     }, MS_PER_FRAME);
   });
+
+  if (frames[frameNum] === undefined) {
+    // Might happen when changing graphs
+    setFrameNum(0);
+  }
 
   return <>
     <Canvas
