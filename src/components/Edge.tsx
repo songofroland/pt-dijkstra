@@ -28,6 +28,7 @@ function Edge({ from, to, label, bgColor }
     left: `${x}%`,
     top: `${y}%`,
     backgroundColor: bgColor,
+    zIndex: 0,
     height: '2px',
     width: `${length}%`,
     transformOrigin: 'top left',
