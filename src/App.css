@@ -43,6 +43,7 @@ main {
   font-size: 1.1rem;
   text-align: justify;
   padding: 1rem;
+  max-width: 800px;
 }
 
 .canvas {
