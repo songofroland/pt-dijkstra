@@ -86,11 +86,9 @@ function GraphChooser({ possibleValues, selectCallback, selectedLabel }
 
 
   return <>
-    <div>
-      <select onChange={onChange} value={selectedLabel}>
-        {options}
-      </select>
-    </div>
+    <select onChange={onChange} value={selectedLabel}>
+      {options}
+    </select>
   </>;
 }
 
