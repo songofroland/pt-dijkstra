@@ -1,24 +1,32 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { isValid, parseValidGraph } from '../logic/graphParsing';
-import samples from '../logic/graphSamples';
+import samples from '../data/graphSamples';
 
 const graphsToChoose = [
   {
-    label: 'Simple graph',
+    label: 'Custom',
+    key: 'custom',
+  },
+  {
+    label: 'Simple',
     key: 'simple',
   },
   {
-    label: 'Medium graph',
+    label: 'Medium',
     key: 'medium',
   },
   {
-    label: 'Advanced graph',
+    label: 'Neuron',
+    key: 'neuron',
+  },
+  {
+    label: 'Advanced',
     key: 'advanced',
   },
   {
-    label: 'Custom',
-    key: 'custom',
+    label: 'Dense',
+    key: 'dense',
   },
 ];
 
