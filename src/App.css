@@ -1,6 +1,14 @@
 :root {
   --background-color: #363b46;
   --element-background: #404855;
+  --hover: #535e70;
+  --text: white;
+  --element-text: rgb(230, 230, 230);
+  --highlight: rgb(161, 0, 161);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .app {
@@ -11,20 +19,31 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  color: var(--text);
 }
 
+.app h1 {
+  text-decoration: underline;
+  text-decoration-color: var(--highlight);
+}
 main {
   display: grid;
   grid-template-areas:
     'canvas description'
     'canvas editor';
+  gap: 1rem;
   justify-content: space-evenly;
+  place-items: center;
   width: 100%;
+  padding: 10px;
 }
 
 .description {
   grid-area: description;
   font-size: 1.1rem;
+  text-align: justify;
+  padding: 1rem;
+  max-width: 800px;
 }
 
 .canvas {
@@ -54,7 +73,7 @@ main {
   right: 0;
   text-align: center;
   font-size: 2.5em;
-  color: magenta;
+  color: var(--highlight);
 }
 
 .graph-editor {
@@ -76,6 +95,7 @@ main {
 
 .editor-bar > * {
   margin: 0px 10px;
+  margin-bottom: 10px;
   max-width: 100%;
 }
 
@@ -89,10 +109,32 @@ main {
   margin: auto;
 }
 
+input,
+select {
+  border: 1px solid var(--hover);
+  background-color: var(--element-background);
+  color: var(--element-text);
+  min-width: 200px;
+  padding: 5px;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+input:hover,
+select:hover {
+  background-color: var(--hover);
+}
+
 textarea {
   margin-top: 10px;
   min-height: 8.3em;
   font-size: 1.3em;
+  background-color: var(--element-background);
+  border: none;
+  border-radius: 5px;
+  color: var(--element-text);
 }
 
 @media (max-width: 640px) {
@@ -101,6 +143,7 @@ textarea {
       'description'
       'canvas'
       'editor';
+    padding: 0;
   }
   .canvas {
     height: 90vmin;
