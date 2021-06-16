@@ -6,7 +6,7 @@ import GraphEditor from './components/GraphEditor';
 import CanvasAnimator from './components/CanvasAnimator';
 
 import { Graph } from './logic/commonInterfaces';
-import samples from './logic/graphSamples';
+import samples from './data/graphSamples';
 import disassembleGraph from './logic/graphDisassembling';
 import createFrames from './logic/graphFrames';
 import mapGraph from './logic/graphMapping';
